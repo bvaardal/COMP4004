@@ -4,3 +4,7 @@ obj
 
 # mstest test results
 TestResults
+
+# Upgrade reports
+_UpgradeReport_Files
+UpgradeLog.XML
