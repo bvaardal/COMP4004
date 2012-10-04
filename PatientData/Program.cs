@@ -19,7 +19,7 @@ namespace PatientData
         private void SetConnection()
         {
             sql_con = new SQLiteConnection
-                ("Data Source=demo.db;Version=3;New=False;Compress=True;");
+                ("Data Source=demo.db;Version=3;New=True;Compress=True;");
         }
 
         private void ExecuteQuery(string txtQuery)
