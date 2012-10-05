@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data;
 
-namespace PatientData.DataSource
+namespace PatientData.Testing.Stubs
 {
-    interface DataSource
+    using DB;
+
+    class DBProxy_Stub : DBProxy
     {
     }
 }

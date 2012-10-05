@@ -7,7 +7,7 @@ using Xunit;
 
 namespace PatientData.Testing.UnitTesting
 {
-    using DataSource.DB;
+    using DB;
 
     public class DBProxy_UnitTest
     {
@@ -29,7 +29,7 @@ namespace PatientData.Testing.UnitTesting
             Assert.DoesNotThrow(
                 delegate
                 {
-                    db.Init("test");
+                    db.Init("DB" + System.IO.Path.DirectorySeparatorChar + "patientData");
                 }
             );
         }
@@ -53,7 +53,14 @@ namespace PatientData.Testing.UnitTesting
                 }
             );
 
-            System.IO.File.Delete("Testing" + System.IO.Path.DirectorySeparatorChar + "UnitTests" + System.IO.Path.DirectorySeparatorChar + dbName + ".db");
+            try
+            {
+                System.IO.File.Delete(dbName + ".db");
+            }
+            catch (Exception)
+            {
+                System.Console.WriteLine("Could not delete test DB.");
+            }
         }
 
         [Fact]
@@ -63,7 +70,7 @@ namespace PatientData.Testing.UnitTesting
          *      
          *  </summary>
          */
-        public void test2()
+        public void test3()
         {
             DBProxy db = new DBProxy();
             String dbName = (new Random()).Next(1000000, 10000000).ToString();
@@ -75,7 +82,14 @@ namespace PatientData.Testing.UnitTesting
                 }
             );
 
-            System.IO.File.Delete("Testing" + System.IO.Path.DirectorySeparatorChar + "UnitTests" + System.IO.Path.DirectorySeparatorChar + dbName + ".db");
+            try
+            {
+                System.IO.File.Delete(dbName + ".db");
+            }
+            catch (Exception)
+            {
+                System.Console.WriteLine("Could not delete test DB.");
+            }
         }
     }
 }

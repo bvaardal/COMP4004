@@ -70,8 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSource\DataSource.cs" />
-    <Compile Include="DataSource\DB\DBProxy.cs" />
+    <Compile Include="DB\DBProxy.cs" />
     <Compile Include="Entities\Actors\Actor.cs" />
     <Compile Include="Entities\Actors\HealthProfessional.cs" />
     <Compile Include="Entities\Actors\Patient.cs" />
@@ -81,13 +80,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Testing\Stubs\DataSource.Stub.cs" />
+    <Compile Include="Testing\Stubs\DBProxy.Stub.cs" />
     <Compile Include="Testing\UnitTests\DBProxy.UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <EmbeddedResource Include="test.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <EmbeddedResource Include="DB\patientData.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -119,7 +118,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="init.sql">
+    <Content Include="DB\init.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
