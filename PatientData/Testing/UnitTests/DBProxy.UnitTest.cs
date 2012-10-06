@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PatientData.Testing.UnitTests
 {
-    using DB;
+    using Data;
     using Entities;
     using Entities.Actors;
 
@@ -100,8 +100,8 @@ namespace PatientData.Testing.UnitTests
 
             Patient p = new Patient();
             HealthProfessional hp = new HealthProfessional();
-            Visit v1;
-            Visit v2;
+            Visit v1 = null;
+            Visit v2 = null;
             List<Visit> visits = null;
 
             Assert.DoesNotThrow(
@@ -121,6 +121,11 @@ namespace PatientData.Testing.UnitTests
             );
 
             Assert.Equal<long>(2, visits.Count);
+
+            foreach (Visit v in visits)
+            {
+                Assert.True(v.Equals(v1) || v.Equals(v2));
+            }
 
             try
             {

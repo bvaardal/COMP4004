@@ -7,7 +7,7 @@ using System.Text;
 
 using Finisar.SQLite;
 
-namespace PatientData.DB
+namespace PatientData.Data
 {
     using Entities;
     using Entities.Actors;

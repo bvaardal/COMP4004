@@ -36,6 +36,31 @@ namespace PatientData.Entities
             ProfessionalAct = proAct;
             Rational = rational;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Visit v = null;
+            try
+            {
+                v = (Visit)obj;
+            }
+            catch (InvalidCastException)
+            {
+                return false;
+            }
+
+            return (
+                this.Patient.UID == v.Patient.UID &&
+                this.HealthProfessional.UID == v.HealthProfessional.UID &&
+                this.Date.Equals(v.Date) &&
+                this.ProfessionalAct.Equals(v.ProfessionalAct) &&
+                this.Rational == v.Rational);
+        }
     }
 
     enum Rational

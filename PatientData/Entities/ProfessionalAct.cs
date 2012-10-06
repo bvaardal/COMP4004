@@ -25,5 +25,27 @@ namespace PatientData.Entities
             OHPA = ohpa;
             Diagnosis = diagnosis;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            ProfessionalAct pa = null;
+            try
+            {
+                pa = (ProfessionalAct)obj;
+            }
+            catch (InvalidCastException)
+            {
+                return false;
+            }
+
+            return (
+                this.OHPA == pa.OHPA &&
+                this.Diagnosis == pa.Diagnosis);
+        }
     }
 }
