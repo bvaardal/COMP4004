@@ -53,8 +53,8 @@ namespace PatientData
 
         static void Main(string[] args)
         {
-            Program p = new Program();
-            p.LoadData();
+            (new Testing.UnitTests.DBProxy_UnitTest()).test3();
+
         }
     }
 }

@@ -7,6 +7,8 @@ namespace PatientData.Entities.Actors
 {
     class Patient : Actor
     {
-
+        public Patient(long pID = -1)
+            : base(pID)
+        { }
     }
 }

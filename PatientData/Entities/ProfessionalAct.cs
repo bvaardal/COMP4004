@@ -7,7 +7,23 @@ namespace PatientData.Entities
 {
     class ProfessionalAct
     {
-        private int _ohpa = 0;
-        private int _diagnosis = 0;
+        public int OHPA { get; private set; }
+        public int Diagnosis { get; private set; }
+
+        public ProfessionalAct(int ohpa, int diagnosis)
+        {
+            if (ohpa < 1 || ohpa > 100)
+            {
+                throw new InvalidParameterException("Invalid OHPA code (" + ohpa + ").");
+            }
+
+            if (diagnosis < 1 || diagnosis > 200)
+            {
+                throw new InvalidParameterException("Invalid diagnosis (" + diagnosis + ").");
+            }
+
+            OHPA = ohpa;
+            Diagnosis = diagnosis;
+        }
     }
 }

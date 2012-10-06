@@ -5,8 +5,13 @@ using System.Text;
 
 namespace PatientData.Entities.Actors
 {
-    class Actor
+    abstract class Actor
     {
-        private long _uid;
+        public long UID { get; set; }
+
+        public Actor(long uID)
+        {
+            UID = uID;
+        }
     }
 }

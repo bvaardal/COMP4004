@@ -5,20 +5,44 @@ using System.Text;
 
 namespace PatientData.Entities
 {
+    using Actors;
+
     class Visit
     {
-        private long            _p = 0;
-        private long            _hp = 0;
-        private DateTime        _time;
-        private Rational        _rational;
-        private ProfessionalAct _proAct;
+        public Patient Patient { get; private set; }
+        public HealthProfessional HealthProfessional { get; private set; }
+        public DateTime Date { get; private set; }
+        public ProfessionalAct ProfessionalAct { get; private set; }
+        public Rational Rational { get; private set; }
+
+        public Visit(Patient p, HealthProfessional hp, DateTime date, ProfessionalAct proAct, Rational rational = Rational.initial)
+        {
+            if (date.CompareTo(new DateTime(2011, 1, 1)) < 0 || date.CompareTo(new DateTime(2011, 12, 31)) > 0)
+            {
+                throw new InvalidParameterException("Date was not within acceptable range (" + date.ToString() + ").");
+            }
+            if (p.UID < 0)
+            {
+                throw new InvalidParameterException("Invalid Patient ID (" + p.UID + ").");
+            }
+            if (hp.UID < 0)
+            {
+                throw new InvalidParameterException("Invalid Health Professional ID (" + hp.UID + ").");
+            }
+
+            Patient = p;
+            HealthProfessional = hp;
+            Date = date;
+            ProfessionalAct = proAct;
+            Rational = rational;
+        }
     }
 
     enum Rational
     {
-        initial,
+        initial = 1,
         checkup,
-        followGup,
+        followUp,
         referral,
         emergency
     }
