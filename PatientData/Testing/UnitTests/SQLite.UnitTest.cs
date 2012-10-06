@@ -58,7 +58,7 @@ namespace PatientData.Testing.UnitTests
             Assert.DoesNotThrow(
                 delegate
                 {
-                    db.Init("DB" + System.IO.Path.DirectorySeparatorChar + "patientData");
+                    db.Init("Data" + System.IO.Path.DirectorySeparatorChar + "patientData");
                 }
             );
         }

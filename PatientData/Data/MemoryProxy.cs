@@ -3,31 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PatientData.Testing.Stubs
+namespace PatientData.Data
 {
-    using Data;
     using Entities;
     using Entities.Actors;
 
-    class DBProxy_Stub : DBProxy
+    class MemoryProxy : DBProxy
     {
-        private Dictionary<Patient, List<Visit>> visits = null;
+        private static long PID = 1;
+        private static long HPID = 1;
 
-        public DBProxy_Stub()
+        private Dictionary<Patient, List<Visit>> visits = null;
+        private List<Patient> patients = null;
+        private List<HealthProfessional> healthProfessionals = null;
+
+        public MemoryProxy()
         {
             visits = new Dictionary<Patient, List<Visit>>();
+            patients = new List<Patient>();
+            healthProfessionals = new List<HealthProfessional>();
         }
 
         public void Init(String dbName, bool newDB = false)
-        {
-        }
+        { }
 
         public void InsertPatient(ref Patient p)
         {
+            patients.Add(p);
+            p.UID = PID++;
         }
 
         public void InsertHealthProfessional(ref HealthProfessional hp)
         {
+            healthProfessionals.Add(hp);
+            hp.UID = HPID++;
         }
 
         public void InsertVisit(Visit v)
@@ -53,9 +62,11 @@ namespace PatientData.Testing.Stubs
             return result;
         }
 
+        /*
         public List<Patient> GetPatients()
         {
 
         }
+        */
     }
 }

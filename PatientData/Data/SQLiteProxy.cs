@@ -15,7 +15,7 @@ namespace PatientData.Data
     class SQLiteProxy : DBProxy
     {
         private static String SQL_GetHealthProfessionalByID =   "SELECT hpID from tbl_healthProfessional WHERE hpID = ";
-        private static String SQL_GetPatients =                 "SELECT pID from tbl_patient";
+        //private static String SQL_GetPatients =                 "SELECT pID from tbl_patient";
         private static String SQL_GetVisitsByPatient =          "SELECT strftime('%Y-%m-%d', vDate) as date, hpID, ohpa, diagnosis, rID FROM tbl_visit WHERE pID = ";
         private static String SQL_InsertHealthProfessional =    "INSERT INTO tbl_healthProfessional (dummy) values ('')";
         private static String SQL_InsertPatient =               "INSERT INTO tbl_patient (dummy) values ('')";
@@ -107,7 +107,7 @@ namespace PatientData.Data
             StreamReader initSQL = null;
             try
             {
-                initSQL = new StreamReader("DB" + Path.DirectorySeparatorChar + "init.sql");
+                initSQL = new StreamReader("Data" + Path.DirectorySeparatorChar + "init.sql");
             }
             catch (Exception)
             {
@@ -239,6 +239,7 @@ namespace PatientData.Data
             return result;
         }
 
+        /*
         public List<Patient> GetPatients()
         {
             List<Patient> result = new List<Patient>();
@@ -256,6 +257,7 @@ namespace PatientData.Data
 
             return result;
         }
+        */
     }
 
     class DBException : Exception

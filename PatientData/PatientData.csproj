@@ -80,12 +80,14 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\ProfessionalAct.cs" />
     <Compile Include="Entities\Visit.cs" />
+    <Compile Include="MatchTest.cs" />
     <Compile Include="Program.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Testing\Stubs\DBProxy.Stub.cs" />
+    <Compile Include="Data\MemoryProxy.cs" />
     <Compile Include="Testing\TestGlobals.cs" />
+    <Compile Include="Testing\UnitTests\Queries.UnitTest.cs" />
     <Compile Include="Testing\UnitTests\SQLite.UnitTest.cs" />
     <Compile Include="Testing\UnitTests\EntityObjects.UnitTest.cs" />
   </ItemGroup>
