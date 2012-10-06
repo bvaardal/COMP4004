@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PatientData.Testing.Stubs
 {
-    using DB;
+    using Data;
     using Entities;
     using Entities.Actors;
 
@@ -18,19 +18,19 @@ namespace PatientData.Testing.Stubs
             visits = new Dictionary<Patient, List<Visit>>();
         }
 
-        public override void Init(String dbName, bool newDB = false)
+        public void Init(String dbName, bool newDB = false)
         {
         }
 
-        public override void InsertPatient(ref Patient p)
+        public void InsertPatient(ref Patient p)
         {
         }
 
-        public override void InsertHealthProfessional(ref HealthProfessional hp)
+        public void InsertHealthProfessional(ref HealthProfessional hp)
         {
         }
 
-        public override void InsertVisit(Visit v)
+        public void InsertVisit(Visit v)
         {
             if (visits.ContainsKey(v.Patient))
             {
@@ -46,11 +46,16 @@ namespace PatientData.Testing.Stubs
             }
         }
 
-        public override List<Visit> GetVisitsByPatient(Patient p)
+        public List<Visit> GetVisitsByPatient(Patient p)
         {
             List<Visit> result = null;
             visits.TryGetValue(p, out result);
             return result;
+        }
+
+        public List<Patient> GetPatients()
+        {
+
         }
     }
 }

@@ -30,7 +30,7 @@ namespace PatientData.Testing.UnitTests
             }
         }
 
-        private string createTempDB(DBProxy db)
+        private string createTempDB(SQLiteProxy db)
         {
             String dbName = TestGlobals.TEMP_DIR + (new Random()).Next(1000000, 10000000).ToString();
 
@@ -53,7 +53,7 @@ namespace PatientData.Testing.UnitTests
          */
         public void test1()
         {
-            DBProxy db = new DBProxy();
+            SQLiteProxy db = new SQLiteProxy();
 
             Assert.DoesNotThrow(
                 delegate
@@ -72,7 +72,7 @@ namespace PatientData.Testing.UnitTests
          */
         public void test2()
         {
-            DBProxy db = new DBProxy();
+            SQLiteProxy db = new SQLiteProxy();
             String dbName = createTempDB(db);
 
             try
@@ -95,7 +95,7 @@ namespace PatientData.Testing.UnitTests
          */
         public void test3()
         {
-            DBProxy db = new DBProxy();
+            SQLiteProxy db = new SQLiteProxy();
             String dbName = createTempDB(db);
 
             Patient p = new Patient();
