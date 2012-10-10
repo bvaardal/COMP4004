@@ -61,6 +61,16 @@ namespace PatientData.Entities
                 this.ProfessionalAct.Equals(v.ProfessionalAct) &&
                 this.Rational == v.Rational);
         }
+
+        public bool Matches(Visit v)
+        {
+            bool result = true;
+
+            result &= this.Date.Equals(v.Date);
+            result &= this.Rational.Equals(v.Rational);
+
+            return result;
+        }
     }
 
     enum Rational

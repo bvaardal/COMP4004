@@ -45,6 +45,15 @@ namespace PatientData
         static void Main(string[] args)
         {
             (new Program()).Run();
+
+            /*
+            List<int> list = new List<int>();
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(i);
+            }
+            IEnumerable<IEnumerable<int>> c = Helpers.TupleGenerator.Combinations<int>(list, 5);
+            */
         }
     }
 }

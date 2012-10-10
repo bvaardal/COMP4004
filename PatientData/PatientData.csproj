@@ -73,7 +73,6 @@
     <Compile Include="Data\DBProxy.cs" />
     <Compile Include="Data\Queries.cs" />
     <Compile Include="Data\SQLiteProxy.cs" />
-    <Compile Include="Data\Structures\Tuple.cs" />
     <Compile Include="Entities\Actors\Actor.cs" />
     <Compile Include="Entities\Actors\HealthProfessional.cs" />
     <Compile Include="Entities\Actors\Patient.cs" />
