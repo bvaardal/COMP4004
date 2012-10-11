@@ -25,12 +25,14 @@ namespace PatientData
                 Console.WriteLine("");
                 Console.WriteLine("-=MENU=-");
                 Console.WriteLine(" 1) Create CM");
+                Console.WriteLine(" 2) Get patient ACVs");
                 if (cmCreated)
                 {
-                    Console.WriteLine(" 2) Report matching ACVs");
+                    Console.WriteLine(" 3) Report matching ACVs");
                 }
+                Console.WriteLine(" 0) Exit");
 
-                int menuOption = UserInput.getNumber("Choose menu option", 1, cmCreated ? 2 : 1);
+                int menuOption = UserInput.getNumber("Choose menu option", 0, cmCreated ? 3 : 2);
 
                 switch (menuOption)
                 {
@@ -39,8 +41,13 @@ namespace PatientData
                         cmCreated = true;
                         break;
                     case 2:
+                        mt.PrintPatientACVs(UserInput.getNumber("Patient ID", 1, 50), UserInput.getNumber("Tuple size", 1, 5));
+                        break;
+                    case 3:
                         mt.PrintACVs(mt.GetMatchingACVs(UserInput.getNumber("Patient ID", 1, 50)));
                         break;
+                    case 0:
+                        return;
                     default:
                         break;
                 }

@@ -273,5 +273,21 @@ namespace PatientData
         {
             cm.Add(new CMPair(dt, (Rational) r));
         }
+
+        public void PrintPatientACVs(int pID, int n)
+        {
+            IEnumerable<IEnumerable<Visit>> acvs = _q.GetACVs(_db.GetPatientByID(pID), n);
+
+            int i = 1;
+            foreach (IEnumerable<Visit> acv in acvs)
+            {
+                Console.WriteLine("ACV " + i++);
+                foreach (Visit v in acv)
+                {
+                    Console.WriteLine("< " + v.Date.ToString("dd-MM-yyyy") + ", " + v.Rational.ToString() + " >");
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
