@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>PatientData.Program</StartupObject>
+    <StartupObject>PatientData.PatientData</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SQLite.NET">
@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\UserInput.cs" />
     <Compile Include="Data\DBProxy.cs" />
     <Compile Include="Data\Queries.cs" />
     <Compile Include="Data\SQLiteProxy.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="Entities\ProfessionalAct.cs" />
     <Compile Include="Entities\Visit.cs" />
     <Compile Include="MatchTest.cs" />
-    <Compile Include="Program.cs">
+    <Compile Include="PatientData.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
