@@ -16,8 +16,8 @@ namespace PatientData.Testing.UnitTests
         public Queries_UnitTest()
         { }
 
-        //[Fact]
-        //[Trait("Query Unit Tests", "Get ACVs")]
+        [Fact]
+        [Trait("Query Unit Tests", "Get ACVs")]
         public void test1()
         {
             DBProxy db = new MemoryProxy();
@@ -26,11 +26,8 @@ namespace PatientData.Testing.UnitTests
             ps.Add(new Patient());
             ps.Add(new Patient());
             ps.Add(new Patient());
-            ps.Add(new Patient());
-            ps.Add(new Patient());
 
             List<HealthProfessional> hps = new List<HealthProfessional>();
-            hps.Add(new HealthProfessional());
             hps.Add(new HealthProfessional());
 
             Assert.DoesNotThrow(
@@ -77,9 +74,15 @@ namespace PatientData.Testing.UnitTests
                 new ProfessionalAct(54, 12),
                 Rational.initial));
             vs.Add(new Visit(
-                ps.ElementAt<Patient>(0),
+                ps.ElementAt<Patient>(1),
                 hps.ElementAt<HealthProfessional>(0),
-                DateTime.Parse("2011-10-04"),
+                DateTime.Parse("2011-10-05"),
+                new ProfessionalAct(54, 12),
+                Rational.initial));
+            vs.Add(new Visit(
+                ps.ElementAt<Patient>(2),
+                hps.ElementAt<HealthProfessional>(0),
+                DateTime.Parse("2011-10-06"),
                 new ProfessionalAct(54, 12),
                 Rational.initial));
 
@@ -91,9 +94,13 @@ namespace PatientData.Testing.UnitTests
                         db.InsertVisit(v);
                     }
                 }
+
             );
 
             Queries queries = new Queries(db);
+
+            IEnumerable<IEnumerable<Visit>> acvs = queries.GetACVs(ps.ElementAt<Patient>(0), 2);
+            Assert.Equal<int>(6, acvs.Count<IEnumerable<Visit>>());
         }
     }
 }

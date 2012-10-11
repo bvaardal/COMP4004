@@ -17,7 +17,7 @@ namespace PatientData.Testing.UnitTests
         }
 
         [Fact]
-        [Trait("Entity objects unit tests", "Create entity objects")]
+        [Trait("Entity objects unit tests", "Create valid entity objects")]
         /**
          *  <summary>
          *      Creates instances of entity objects that do not have special conditions.
@@ -25,28 +25,70 @@ namespace PatientData.Testing.UnitTests
          */
         public void test1()
         {
+            Assert.DoesNotThrow(
+                delegate
+                {
+                    new Patient();
+                    new Patient(1);
+                    new HealthProfessional();
+                    new HealthProfessional(1);
+                    new CMPair(new DateTime(2011, 01, 01), Rational.initial);
+                    new ProfessionalAct(1, 1);
+                    new Visit(new Patient(1), new HealthProfessional(1), new DateTime(2011, 01, 01), new ProfessionalAct(1, 1), Rational.initial);
+                }
+            );
         }
 
         [Fact]
-        [Trait("Entity objects unit tests", "Create visit")]
+        [Trait("Entity objects unit tests", "Create invalid entity objects")]
         /**
          *  <summary>
-         *      Creates instance of Visit. Attempts invalid date.
+         *      Create invalid instances of entity objects. Expect InvalidParameterException.
          *  </summary>
          */
         public void test2()
         {
-        }
+            Assert.Throws<InvalidParameterException>(
+                delegate
+                {
+                    new HealthProfessional(200);
+                }
+            );
 
-        [Fact]
-        [Trait("Entity objects unit tests", "Create professional act")]
-        /**
-         *  <summary>
-         *      Creates instance of ProfessionalAct. Attempts invalid OHPA and diagnosis.
-         *  </summary>
-         */
-        public void test3()
-        {
+            Assert.Throws<InvalidParameterException>(
+                delegate
+                {
+                    new ProfessionalAct(1000, 1);
+                }
+            );
+
+            Assert.Throws<InvalidParameterException>(
+                delegate
+                {
+                    new ProfessionalAct(1, 1000);
+                }
+            );
+
+            Assert.Throws<InvalidParameterException>(
+                delegate
+                {
+                    new Visit(new Patient(), new HealthProfessional(1), new DateTime(2011, 01, 01), new ProfessionalAct(1, 1), Rational.initial);
+                }
+            );
+
+            Assert.Throws<InvalidParameterException>(
+                delegate
+                {
+                    new Visit(new Patient(1), new HealthProfessional(), new DateTime(2011, 01, 01), new ProfessionalAct(1, 1), Rational.initial);
+                }
+            );
+
+            Assert.Throws<InvalidParameterException>(
+                delegate
+                {
+                    new Visit(new Patient(1), new HealthProfessional(), new DateTime(2010, 01, 01), new ProfessionalAct(1, 1), Rational.initial);
+                }
+            );
         }
     }
 }

@@ -7,10 +7,6 @@ namespace PatientData.Control
 {
     static class UserInput
     {
-        public static void Output(String s)
-        {
-            Console.Write(s);
-        }
 
         /**
          * 
@@ -48,7 +44,7 @@ namespace PatientData.Control
 
             while (true)
             {
-                Console.Write(subject + " - please enter a date between " + lowerBound.ToString("DD-MM-YYYY") + " and " + upperBound.ToString("DD-MM-YYYY") + ": ");
+                Console.Write(subject + " - please enter a date between " + lowerBound.ToString("dd-MM-yyyy") + " and " + upperBound.ToString("dd-MM-yyyy") + ": ");
                 String strResult = Console.ReadLine();
                 try
                 {
@@ -58,8 +54,13 @@ namespace PatientData.Control
                         break;
                     }
                 }
-                catch (Exception)
-                { }
+                catch (Exception x)
+                {
+                    if (strResult.Equals(""))
+                    {
+                        throw x;
+                    }
+                }
                 Console.Write("Invalid date. ");
             }
 

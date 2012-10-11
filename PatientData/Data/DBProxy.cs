@@ -15,5 +15,6 @@ namespace PatientData.Data
         void InsertHealthProfessional(ref HealthProfessional hp);
         void InsertVisit(Visit v);
         List<Visit> GetVisitsByPatient(Patient p);
+        Patient GetPatientByID(long pID);
     }
 }

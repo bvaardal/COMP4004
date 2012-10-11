@@ -7,15 +7,14 @@ namespace PatientData.Entities
 {
     using Actors;
 
-    class Visit
+    class Visit : CMPair
     {
         public Patient Patient { get; private set; }
         public HealthProfessional HealthProfessional { get; private set; }
-        public DateTime Date { get; private set; }
         public ProfessionalAct ProfessionalAct { get; private set; }
-        public Rational Rational { get; private set; }
 
         public Visit(Patient p, HealthProfessional hp, DateTime date, ProfessionalAct proAct, Rational rational = Rational.initial)
+            : base(date, rational)
         {
             if (date.CompareTo(new DateTime(2011, 1, 1)) < 0 || date.CompareTo(new DateTime(2011, 12, 31)) > 0)
             {
@@ -36,49 +35,5 @@ namespace PatientData.Entities
             ProfessionalAct = proAct;
             Rational = rational;
         }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            Visit v = null;
-            try
-            {
-                v = (Visit)obj;
-            }
-            catch (InvalidCastException)
-            {
-                return false;
-            }
-
-            return (
-                this.Patient.UID == v.Patient.UID &&
-                this.HealthProfessional.UID == v.HealthProfessional.UID &&
-                this.Date.Equals(v.Date) &&
-                this.ProfessionalAct.Equals(v.ProfessionalAct) &&
-                this.Rational == v.Rational);
-        }
-
-        public bool Matches(Visit v)
-        {
-            bool result = true;
-
-            result &= this.Date.Equals(v.Date);
-            result &= this.Rational.Equals(v.Rational);
-
-            return result;
-        }
-    }
-
-    enum Rational
-    {
-        initial = 1,
-        checkup,
-        followUp,
-        referral,
-        emergency
     }
 }

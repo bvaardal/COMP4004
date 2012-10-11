@@ -24,21 +24,28 @@ namespace PatientData
         private DateTime _start;
         private HealthProfessional hp;
 
-        public MatchTest(int patients)
+        private List<CMPair> cm;
+
+        public MatchTest()
         {
             _db = new SQLiteProxy();
             _db.Init("Data" + System.IO.Path.DirectorySeparatorChar + "patientData");
 
             _q = new Queries(_db);
 
+            cm = new List<CMPair>();
+
             _start = START;
-            
+        }
+
+        public void Init(int patients)
+        {
             /* Create 1 Health Professional and add to DB */
             hp = createHealthProfessional(1).FirstOrDefault();
 
             /* Create new patients, and add to DB */
             IEnumerable<Patient> newPatients = createPatients(patients);
-            
+
             /* Create collection consisting of the 10% of the total patients */
             IEnumerable<Patient> nonMatchingPatients = new List<Patient>(newPatients.Take<Patient>((int)Math.Ceiling(newPatients.Count<Patient>() * 0.1)));
             /* Create non-matching visit records for the given patients, and add to DB */
@@ -206,6 +213,65 @@ namespace PatientData
                             (Rational)(new Random()).Next(1, 6)));
                 }
             }
+        }
+
+        /**
+         *  <summary>
+         *      Gets all ACVs (of same size as the given CM) for the given patient that match the
+         *      given CM.
+         *  </summary>
+         *  
+         *  <param name="pID">
+         *      The ID of the patient to get ACVs for
+         *  </param>
+         *  <param name="cms">
+         *      The CM to compare against
+         *  </param>
+         */
+        public IEnumerable<IEnumerable<Visit>> GetMatchingACVs(int pID)
+        {
+            List<IEnumerable<Visit>> result = new List<IEnumerable<Visit>>();
+
+            IEnumerable<IEnumerable<Visit>> acvs = _q.GetACVs(_db.GetPatientByID(pID), cm.Count<CMPair>());
+
+            foreach (IEnumerable<Visit> acv in acvs)
+            {
+                bool match = true;
+                foreach (Visit v in acv)
+                {
+                    match &= cm.Contains<CMPair>(v);
+                }
+                if (match)
+                {
+                    result.Add(acv);
+                }
+            }
+
+            return (IEnumerable<IEnumerable<Visit>>)result;
+        }
+
+        public void PrintACVs(IEnumerable<IEnumerable<Visit>> acvs)
+        {
+            int i = 1;
+            foreach (IEnumerable<Visit> acv in acvs)
+            {
+                Console.WriteLine("Match " + i++);
+                foreach (CMPair cmp in acv)
+                {
+                    Console.WriteLine("< " + cmp.Date.ToString("dd-MM-yyyy") + ", " + cmp.Rational.ToString() + " >");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public void ClearCM()
+        {
+            cm = new List<CMPair>();
+        }
+
+        public void AddCM(DateTime dt, int r)
+        {
+            cm.Add(new CMPair(dt, (Rational) r));
         }
     }
 }

@@ -41,7 +41,7 @@ namespace PatientData.Data
 
         public void InsertVisit(Visit v)
         {
-            if (visits.ContainsKey(v.Patient))
+            if (!visits.ContainsKey(v.Patient))
             {
                 List<Visit> pVisits = new List<Visit>();
                 pVisits.Add(v);
@@ -62,11 +62,16 @@ namespace PatientData.Data
             return result;
         }
 
-        /*
-        public List<Patient> GetPatients()
+        public Patient GetPatientByID(long pID)
         {
-
+            foreach (Patient p in patients)
+            {
+                if (p.UID == pID)
+                {
+                    return p;
+                }
+            }
+            return null;
         }
-        */
     }
 }

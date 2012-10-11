@@ -70,13 +70,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Control\UserInput.cs" />
+    <Compile Include="Control\UserIO.cs" />
     <Compile Include="Data\DBProxy.cs" />
     <Compile Include="Data\Queries.cs" />
     <Compile Include="Data\SQLiteProxy.cs" />
     <Compile Include="Entities\Actors\Actor.cs" />
     <Compile Include="Entities\Actors\HealthProfessional.cs" />
     <Compile Include="Entities\Actors\Patient.cs" />
+    <Compile Include="Entities\CMPair.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\ProfessionalAct.cs" />
     <Compile Include="Entities\Visit.cs" />

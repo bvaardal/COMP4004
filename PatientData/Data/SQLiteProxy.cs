@@ -15,7 +15,7 @@ namespace PatientData.Data
     class SQLiteProxy : DBProxy
     {
         private static String SQL_GetHealthProfessionalByID =   "SELECT hpID from tbl_healthProfessional WHERE hpID = ";
-        //private static String SQL_GetPatients =                 "SELECT pID from tbl_patient";
+        private static String SQL_GetPatientByID =              "SELECT pID from tbl_patient WHERE pID = ";
         private static String SQL_GetVisitsByPatient =          "SELECT strftime('%Y-%m-%d', vDate) as date, hpID, ohpa, diagnosis, rID FROM tbl_visit WHERE pID = ";
         private static String SQL_InsertHealthProfessional =    "INSERT INTO tbl_healthProfessional (dummy) values ('')";
         private static String SQL_InsertPatient =               "INSERT INTO tbl_patient (dummy) values ('')";
@@ -193,6 +193,11 @@ namespace PatientData.Data
 
         public List<Visit> GetVisitsByPatient(Patient p)
         {
+            if (p == null)
+            {
+                return new List<Visit>();
+            }
+
             List<Visit> result = new List<Visit>(20);
 
             openDBConnection();
@@ -239,25 +244,33 @@ namespace PatientData.Data
             return result;
         }
 
-        /*
-        public List<Patient> GetPatients()
+        /**
+         *  <summary>
+         *      Gets the patient with the given ID.
+         *  </summary>
+         *  
+         *  <param name="pID">
+         *      The ID of the patient being requested.
+         *  </param>
+         */
+        public Patient GetPatientByID(long pID)
         {
-            List<Patient> result = new List<Patient>();
+            Patient result = null;
 
             openDBConnection();
             SQLiteCommand sqlCmd = _sqlConnection.CreateCommand();
-            SQLiteDataAdapter da = new SQLiteDataAdapter(SQL_GetPatients, _sqlConnection);
+            SQLiteDataAdapter da = new SQLiteDataAdapter(SQL_GetPatientByID + pID, _sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-            foreach (DataRow r in dt.Rows)
+            if (dt.Rows.Count > 0)
             {
-                result.Add(new Patient(r.Field<long>("pID")));
+                long q_pID = dt.Rows[0].Field<long>("pID");
+                result = new Patient(q_pID);
             }
 
             return result;
         }
-        */
     }
 
     class DBException : Exception
