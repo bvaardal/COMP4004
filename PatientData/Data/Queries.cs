@@ -55,7 +55,7 @@ namespace PatientData.Data
          *      http://stackoverflow.com/questions/127704/algorithm-to-return-all-combinations-of-k-elements-from-n
          *  </summary>
          */
-        public static IEnumerable<IEnumerable<Visit>> VisitCombinations(this IEnumerable<Visit> visits, int n)
+        public static IEnumerable<IEnumerable<Visit>> VisitCombinations(IEnumerable<Visit> visits, int n)
         {
             return n == 0 ? new[] { new Visit[0] } :
               visits.SelectMany((v, i) =>
