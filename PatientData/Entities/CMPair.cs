@@ -7,8 +7,8 @@ namespace PatientData.Entities
 {
     class CMPair
     {
-        public DateTime Date { get; protected set; }
-        public Rational Rational { get; protected set; }
+        public DateTime Date { get; set; }
+        public Rational Rational { get; set; }
 
         public CMPair(DateTime dt, Rational r)
         {

@@ -8,7 +8,6 @@ using Xunit;
 namespace PatientData.Testing.UnitTests
 {
     using Entities;
-    using Entities.Actors;
 
     public class EntityObjects_UnitTest
     {

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Windows.Forms;
 
 namespace PatientData
 {
     using Control;
+    using GUI;
 
-    class PatientData
+    class Program
     {
         private MatchTest mt;
 
@@ -76,9 +78,14 @@ namespace PatientData
             }
         }
 
+        [STAThread]
         static void Main(string[] args)
         {
-            (new PatientData()).Run();
+            //(new PatientData()).Run();
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new MainWindow());
+            new PatientDataController();
         }
     }
 }

@@ -7,7 +7,6 @@ namespace PatientData
 {
     using Data;
     using Entities;
-    using Entities.Actors;
 
     class MatchTest
     {

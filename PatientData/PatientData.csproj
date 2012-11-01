@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6D926275-06B0-41D1-8C8F-0A9E45DFD201}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PatientData</RootNamespace>
     <AssemblyName>PatientData</AssemblyName>
@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>PatientData.PatientData</StartupObject>
+    <StartupObject>PatientData.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SQLite.NET">
@@ -59,8 +59,11 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -74,15 +77,26 @@
     <Compile Include="Data\DBProxy.cs" />
     <Compile Include="Data\Queries.cs" />
     <Compile Include="Data\SQLiteProxy.cs" />
-    <Compile Include="Entities\Actors\Actor.cs" />
-    <Compile Include="Entities\Actors\HealthProfessional.cs" />
-    <Compile Include="Entities\Actors\Patient.cs" />
+    <Compile Include="Entities\Actor.cs" />
+    <Compile Include="Entities\HealthProfessional.cs" />
+    <Compile Include="Entities\Patient.cs" />
     <Compile Include="Entities\CMPair.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\ProfessionalAct.cs" />
     <Compile Include="Entities\Visit.cs" />
+    <Compile Include="GUI\CMPairControl.cs" />
+    <Compile Include="GUI\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MainWindow.Functions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MatchTest.cs" />
-    <Compile Include="PatientData.cs">
+    <Compile Include="PatientDataController.cs" />
+    <Compile Include="Program.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,10 +107,14 @@
     <Compile Include="Testing\UnitTests\EntityObjects.UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GUI\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <EmbeddedResource Include="Data\patientData.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

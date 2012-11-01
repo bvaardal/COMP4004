@@ -6,7 +6,6 @@ using System.Text;
 namespace PatientData.Data
 {
     using Entities;
-    using Entities.Actors;
 
     class Queries
     {

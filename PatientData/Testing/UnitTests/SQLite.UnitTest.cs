@@ -10,7 +10,6 @@ namespace PatientData.Testing.UnitTests
 {
     using Data;
     using Entities;
-    using Entities.Actors;
 
     public class DBProxy_UnitTest
     {

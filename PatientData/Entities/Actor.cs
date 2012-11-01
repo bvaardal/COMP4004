@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PatientData.Entities.Actors
+namespace PatientData.Entities
 {
     abstract class Actor
     {

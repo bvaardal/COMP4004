@@ -5,8 +5,6 @@ using System.Text;
 
 namespace PatientData.Entities
 {
-    using Actors;
-
     class Visit : CMPair
     {
         public Patient Patient { get; private set; }

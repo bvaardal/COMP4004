@@ -10,7 +10,6 @@ using Finisar.SQLite;
 namespace PatientData.Data
 {
     using Entities;
-    using Entities.Actors;
 
     class SQLiteProxy : DBProxy
     {
