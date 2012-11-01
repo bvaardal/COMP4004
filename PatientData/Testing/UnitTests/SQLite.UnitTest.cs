@@ -31,7 +31,7 @@ namespace PatientData.Testing.UnitTests
 
         private string createTempDB(SQLiteProxy db)
         {
-            String dbName = TestGlobals.TEMP_DIR + (new Random()).Next(1000000, 10000000).ToString();
+            String dbName = TestGlobals.TEMP_DIR + (new Random()).Next(1000000, 10000000).ToString() + ".db";
 
             Assert.DoesNotThrow(
                 delegate
@@ -57,7 +57,7 @@ namespace PatientData.Testing.UnitTests
             Assert.DoesNotThrow(
                 delegate
                 {
-                    db.Init("Data" + System.IO.Path.DirectorySeparatorChar + "patientData");
+                    db.Init("Data" + System.IO.Path.DirectorySeparatorChar + "patientData.db");
                 }
             );
         }

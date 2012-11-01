@@ -6,6 +6,7 @@ using System.Text;
 namespace PatientData.Data
 {
     using Entities;
+    using Helpers;
 
     class MemoryProxy : DBProxy
     {
@@ -71,6 +72,28 @@ namespace PatientData.Data
                 }
             }
             return null;
+        }
+
+        /**
+         *  <summary>
+         *      Gets all Actual Combinations of Visits (ACV) for the Patient p in nTuples of a
+         *      given size n.
+         *  </summary>
+         *  
+         *  <param name="p">
+         *      The patient to get ACVs for.
+         *  </param>
+         *  <param name="n">
+         *      The size of the nTuple.
+         *  </param>
+         */
+        public IEnumerable<IEnumerable<Visit>> GetACVs(Patient p, int n)
+        {
+            if (n < 1 || n > 5)
+            {
+                throw new TupleSizeException(n);
+            }
+            return TupleGenerator.VisitCombinations(GetVisitsByPatient(p), n);
         }
     }
 }

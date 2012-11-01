@@ -52,8 +52,8 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnb_newDB = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnb_openDB = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +63,7 @@
             this.btn_getACVs = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_createTestData = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -310,35 +311,37 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newDBToolStripMenuItem,
-            this.openDBToolStripMenuItem,
+            this.mnb_newDB,
+            this.mnb_openDB,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // newDBToolStripMenuItem
+            // mnb_newDB
             // 
-            this.newDBToolStripMenuItem.Name = "newDBToolStripMenuItem";
-            this.newDBToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.newDBToolStripMenuItem.Text = "New DB";
+            this.mnb_newDB.Name = "mnb_newDB";
+            this.mnb_newDB.Size = new System.Drawing.Size(152, 22);
+            this.mnb_newDB.Text = "New DB";
+            this.mnb_newDB.Click += new System.EventHandler(this.mnb_newDB_Click);
             // 
-            // openDBToolStripMenuItem
+            // mnb_openDB
             // 
-            this.openDBToolStripMenuItem.Name = "openDBToolStripMenuItem";
-            this.openDBToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.openDBToolStripMenuItem.Text = "Open DB";
+            this.mnb_openDB.Name = "mnb_openDB";
+            this.mnb_openDB.Size = new System.Drawing.Size(152, 22);
+            this.mnb_openDB.Text = "Open DB";
+            this.mnb_openDB.Click += new System.EventHandler(this.mnb_openDB_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(118, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // actionsToolStripMenuItem
@@ -379,13 +382,14 @@
             this.btn_getACVs.TabIndex = 4;
             this.btn_getACVs.Text = "Get ACVs";
             this.btn_getACVs.UseVisualStyleBackColor = true;
+            this.btn_getACVs.Click += new System.EventHandler(this.btn_getACVs_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(175, 174);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(832, 414);
+            this.dataGridView1.Size = new System.Drawing.Size(832, 416);
             this.dataGridView1.TabIndex = 7;
             // 
             // btn_createTestData
@@ -397,11 +401,21 @@
             this.btn_createTestData.Text = "Create test data";
             this.btn_createTestData.UseVisualStyleBackColor = true;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(12, 261);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(157, 329);
+            this.listBox1.TabIndex = 9;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 601);
+            this.ClientSize = new System.Drawing.Size(1019, 602);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btn_createTestData);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btn_getACVs);
@@ -458,8 +472,8 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newDBToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openDBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnb_newDB;
+        private System.Windows.Forms.ToolStripMenuItem mnb_openDB;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
@@ -469,5 +483,6 @@
         private System.Windows.Forms.Button btn_getACVs;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btn_createTestData;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

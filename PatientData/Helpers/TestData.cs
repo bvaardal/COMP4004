@@ -8,7 +8,7 @@ namespace PatientData
     using Data;
     using Entities;
 
-    class MatchTest
+    class TestData
     {
         private static readonly DateTime START = new DateTime(2011, 01, 01);
         private static readonly DateTime END = new DateTime(2011, 12, 31);
@@ -17,27 +17,19 @@ namespace PatientData
         private static readonly float MATCHING_RATIO = 0.5f;
         private static readonly int MATCHINGPATIENTS_LOWERBOUND = 4;
 
-        private DBProxy _db;
-        private Queries _q;
-
         private DateTime _start;
         private HealthProfessional hp;
 
-        private List<CMPair> cm;
+        DBProxy _db;
 
-        public MatchTest()
+        public TestData(DBProxy model)
         {
-            _db = new SQLiteProxy();
-            _db.Init("Data" + System.IO.Path.DirectorySeparatorChar + "patientData");
-
-            _q = new Queries(_db);
-
-            cm = new List<CMPair>();
+            _db = model;
 
             _start = START;
         }
 
-        public void Init(int patients)
+        public void CreateTestData(int patients)
         {
             /* Create 1 Health Professional and add to DB */
             hp = createHealthProfessional(1).FirstOrDefault();
@@ -227,11 +219,11 @@ namespace PatientData
          *      The CM to compare against
          *  </param>
          */
-        public IEnumerable<IEnumerable<Visit>> GetMatchingACVs(int pID)
+        /*public IEnumerable<IEnumerable<Visit>> GetMatchingACVs(HashSet<CMPair> cm, Patient p)
         {
             List<IEnumerable<Visit>> result = new List<IEnumerable<Visit>>();
 
-            IEnumerable<IEnumerable<Visit>> acvs = _q.GetACVs(_db.GetPatientByID(pID), cm.Count<CMPair>());
+            IEnumerable<IEnumerable<Visit>> acvs = _db.GetACVs(p, cm.Count<CMPair>());
 
             foreach (IEnumerable<Visit> acv in acvs)
             {
@@ -247,46 +239,6 @@ namespace PatientData
             }
 
             return (IEnumerable<IEnumerable<Visit>>)result;
-        }
-
-        public void PrintACVs(IEnumerable<IEnumerable<Visit>> acvs)
-        {
-            int i = 1;
-            foreach (IEnumerable<Visit> acv in acvs)
-            {
-                Console.WriteLine("Match " + i++);
-                foreach (CMPair cmp in acv)
-                {
-                    Console.WriteLine("< " + cmp.Date.ToString("dd-MM-yyyy") + ", " + cmp.Rational.ToString() + " >");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        public void ClearCM()
-        {
-            cm = new List<CMPair>();
-        }
-
-        public void AddCM(DateTime dt, int r)
-        {
-            cm.Add(new CMPair(dt, (Rational) r));
-        }
-
-        public void PrintPatientACVs(int pID, int n)
-        {
-            IEnumerable<IEnumerable<Visit>> acvs = _q.GetACVs(_db.GetPatientByID(pID), n);
-
-            int i = 1;
-            foreach (IEnumerable<Visit> acv in acvs)
-            {
-                Console.WriteLine("ACV " + i++);
-                foreach (Visit v in acv)
-                {
-                    Console.WriteLine("< " + v.Date.ToString("dd-MM-yyyy") + ", " + v.Rational.ToString() + " >");
-                }
-                Console.WriteLine();
-            }
-        }
+        }*/
     }
 }

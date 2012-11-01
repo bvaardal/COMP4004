@@ -11,16 +11,18 @@ namespace PatientData.GUI
 {
     using Entities;
 
-    public partial class MainWindow : Form
+    partial class MainWindow : Form
     {
         private PatientDataController controller;
 
         private Dictionary<CMPairControl, CMPair> cmPairsControls;
         private List<Rational> rationals;
         private List<Patient> patients;
-
-        public MainWindow(PatientDataController controller)
+        
+        public MainWindow(PatientDataController pdc)
         {
+            controller = pdc;
+            
             InitializeComponent();
             
             cmPairsControls = new Dictionary<CMPairControl, CMPair>();
@@ -43,6 +45,7 @@ namespace PatientData.GUI
             ddl_cmVisit5Rational.DataSource = rationals;
         }
 
+        #region Events
         private void MainWindow_Load(object sender, EventArgs e)
         {
 
@@ -60,6 +63,71 @@ namespace PatientData.GUI
                     break;
                 }
             }
+        }
+
+        private void btn_getACVs_Click(object sender, EventArgs e)
+        {
+            HashSet<CMPair> cm = generateCM();
+
+        }
+
+        private void mnb_newDB_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.FileOk += btn_newDBSave;
+            fd.ShowDialog(this);
+        }
+
+        private void btn_newDBSave(object sender, EventArgs e)
+        {
+            SaveFileDialog fd = (SaveFileDialog)sender;
+            controller.InitModel(fd.FileName, true);
+        }
+
+        private void mnb_openDB_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.FileOk += btn_newDBOpen;
+            fd.ShowDialog(this);
+        }
+
+        private void btn_newDBOpen(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = (OpenFileDialog)sender;
+            controller.InitModel(fd.FileName, false);
+        }
+        #endregion
+
+        #region Functions
+        private HashSet<CMPair> generateCM()
+        {
+            /* Get enabled CMPairs */
+            HashSet<CMPair> result = new HashSet<CMPair>();
+            foreach (CMPairControl c in cmPairsControls.Keys)
+            {
+                if (c.Enabled.Checked)
+                {
+                    /* Get associated CMPair */
+                    CMPair cmPair;
+                    cmPairsControls.TryGetValue(c, out cmPair);
+                    if (cmPair == null)
+                    {
+                        throw new Exception("An error occured while generating the CM. CMPairControls not set up correctly.");
+                    }
+
+                    /* Put View data in CMPair */
+                    cmPair.Date = c.Date.Value;
+                    cmPair.Rational = (Rational)c.Rational.SelectedValue;
+                    result.Add(cmPair);
+                }
+            }
+            return result;
+        }
+        #endregion
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

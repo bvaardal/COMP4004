@@ -10,6 +10,7 @@ using Finisar.SQLite;
 namespace PatientData.Data
 {
     using Entities;
+    using Helpers;
 
     class SQLiteProxy : DBProxy
     {
@@ -47,7 +48,7 @@ namespace PatientData.Data
         public void Init(String dbName, bool newDB = false)
         {
             _sqlConnection = new SQLiteConnection(
-                "Data Source=" + dbName + ".db;" +
+                "Data Source=" + dbName + ";" +
                 "Version=3;" + 
                 "New=" + newDB.ToString() + ";" + 
                 "Compress=True;");
@@ -270,12 +271,27 @@ namespace PatientData.Data
 
             return result;
         }
-    }
 
-    class DBException : Exception
-    {
-        public DBException(String s)
-            : base(s)
-        { }
+        /**
+         *  <summary>
+         *      Gets all Actual Combinations of Visits (ACV) for the Patient p in nTuples of a
+         *      given size n.
+         *  </summary>
+         *  
+         *  <param name="p">
+         *      The patient to get ACVs for.
+         *  </param>
+         *  <param name="n">
+         *      The size of the nTuple.
+         *  </param>
+         */
+        public IEnumerable<IEnumerable<Visit>> GetACVs(Patient p, int n)
+        {
+            if (n < 1 || n > 5)
+            {
+                throw new TupleSizeException(n);
+            }
+            return TupleGenerator.VisitCombinations(GetVisitsByPatient(p), n);
+        }
     }
 }

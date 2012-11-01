@@ -95,11 +95,10 @@ namespace PatientData.Testing.UnitTests
                 }
 
             );
-
-            Queries queries = new Queries(db);
-
-            IEnumerable<IEnumerable<Visit>> acvs = queries.GetACVs(ps.ElementAt<Patient>(0), 2);
-            Assert.Equal<int>(6, acvs.Count<IEnumerable<Visit>>());
+            
+            
+            //IEnumerable<IEnumerable<Visit>> acvs = model.GetACVs(ps.ElementAt<Patient>(0), 2);
+            //Assert.Equal<int>(6, acvs.Count<IEnumerable<Visit>>());
         }
     }
 }

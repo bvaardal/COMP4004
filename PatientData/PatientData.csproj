@@ -75,7 +75,6 @@
   <ItemGroup>
     <Compile Include="Control\UserIO.cs" />
     <Compile Include="Data\DBProxy.cs" />
-    <Compile Include="Data\Queries.cs" />
     <Compile Include="Data\SQLiteProxy.cs" />
     <Compile Include="Entities\Actor.cs" />
     <Compile Include="Entities\HealthProfessional.cs" />
@@ -91,10 +90,8 @@
     <Compile Include="GUI\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\MainWindow.Functions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MatchTest.cs" />
+    <Compile Include="Helpers\TupleGenerator.cs" />
+    <Compile Include="Helpers\TestData.cs" />
     <Compile Include="PatientDataController.cs" />
     <Compile Include="Program.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -114,7 +111,6 @@
     <EmbeddedResource Include="Data\patientData.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

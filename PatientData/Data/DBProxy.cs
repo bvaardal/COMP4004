@@ -15,5 +15,20 @@ namespace PatientData.Data
         void InsertVisit(Visit v);
         List<Visit> GetVisitsByPatient(Patient p);
         Patient GetPatientByID(long pID);
+        IEnumerable<IEnumerable<Visit>> GetACVs(Patient p, int n);
+    }
+
+    class DBException : Exception
+    {
+        public DBException(String s)
+            : base(s)
+        { }
+    }
+
+    class TupleSizeException : Exception
+    {
+        public TupleSizeException(int n)
+            : base("Tuple size (" + n + ") is not supported")
+        { }
     }
 }
