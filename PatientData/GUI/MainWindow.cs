@@ -52,6 +52,12 @@ namespace PatientData.GUI
             dtp_cmVisit3Date.Value = DateTime.Parse("2011-01-01");
             dtp_cmVisit4Date.Value = DateTime.Parse("2011-01-01");
             dtp_cmVisit5Date.Value = DateTime.Parse("2011-01-01");
+
+            chk_cmVisit1Enable.Checked = false;
+            chk_cmVisit2Enable.Checked = false;
+            chk_cmVisit3Enable.Checked = false;
+            chk_cmVisit4Enable.Checked = false;
+            chk_cmVisit5Enable.Checked = false;
         }
 
         #region Events
@@ -93,6 +99,7 @@ namespace PatientData.GUI
         {
             SaveFileDialog fd = (SaveFileDialog)sender;
             controller.InitModel(fd.FileName, true);
+            refreshLists();
         }
 
         private void mnb_openDB_Click(object sender, EventArgs e)
@@ -106,6 +113,7 @@ namespace PatientData.GUI
         {
             OpenFileDialog fd = (OpenFileDialog)sender;
             controller.InitModel(fd.FileName, false);
+            refreshLists();
         }
 
         private void btn_createTestData_Click(object sender, EventArgs e)
@@ -126,11 +134,12 @@ namespace PatientData.GUI
         {
             GenerateTestData gtd = (GenerateTestData)sender;
             controller.CreateTestData(gtd.MatchingPatients, gtd.MatchingVisits, gtd.RandomPatients, gtd.RandomVisits);
+            refreshLists();
         }
 
         private void btn_refreshPatients_Click(object sender, EventArgs e)
         {
-            lst_patients.DataSource = controller.GetPatients();
+            refreshLists();
         }
 
         private void btn_exit_Click(object sender, EventArgs e)
@@ -143,6 +152,10 @@ namespace PatientData.GUI
             if (((ListBox)sender).SelectedItem != null)
             {
                 lst_visits.DataSource = controller.GetVisitsByPatient((Patient)((ListBox)sender).SelectedItem);
+            }
+            else
+            {
+                lst_visits.DataSource = new List<Visit>(0);
             }
         }
 
@@ -195,6 +208,20 @@ namespace PatientData.GUI
                 }
             }
             return result;
+        }
+
+        private void refreshLists()
+        {
+            lst_patients.DataSource = controller.GetPatients();
+            if (((ListBox)lst_patients).SelectedItem != null)
+            {
+                lst_visits.DataSource = controller.GetVisitsByPatient((Patient)((ListBox)lst_patients).SelectedItem);
+            }
+            else
+            {
+                lst_visits.DataSource = new List<Visit>(0);
+            }
+
         }
         #endregion
     }
