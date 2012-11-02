@@ -78,14 +78,16 @@ namespace PatientData.GUI
         private void btn_match_Click(object sender, EventArgs e)
         {
             HashSet<CMPair> cm = generateCM();
-            IEnumerable<IEnumerable<Visit>> matches = controller.GetMatchingACVs(cm, (Patient)lst_patients.SelectedItem);
+            IEnumerable<IEnumerable<Visit>> matches = controller.GetMatchingACVs(cm, Enumerable.Cast<Patient>(lst_patients.SelectedItems));
 
             List<ACVView> matchView = new List<ACVView>(matches.Count<IEnumerable<Visit>>());
             foreach (IEnumerable<Visit> match in matches)
             {
                 matchView.Add(new ACVView(match));
             }
-            lst_matchingACVs.DataSource = matchView;
+            lst_output.DataSource = matchView;
+
+            lbl_output.Text = "ACVs of selecte patients matching the CM";
         }
 
         private void mnb_newDB_Click(object sender, EventArgs e)
@@ -182,6 +184,18 @@ namespace PatientData.GUI
                 }
             }
         }
+
+        private void btn_safePatients_Click(object sender, EventArgs e)
+        {
+            lst_output.DataSource = getSafePatients((int)num_acvSize.Value);
+            lbl_output.Text = "Safe patients with ACV size " + (int)num_acvSize.Value;
+        }
+
+        private void btn_unsafePatients_Click(object sender, EventArgs e)
+        {
+            lst_output.DataSource = getUnsafePatients((int)num_acvSize.Value);
+            lbl_output.Text = "ACV of unsafe patients with ACV size " + (int)num_acvSize.Value;
+        }
         #endregion
 
         #region Functions
@@ -222,6 +236,16 @@ namespace PatientData.GUI
                 lst_visits.DataSource = new List<Visit>(0);
             }
 
+        }
+
+        private IEnumerable<Patient> getSafePatients(int acvSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<IEnumerable<ACVView>> getUnsafePatients(int acvSize)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

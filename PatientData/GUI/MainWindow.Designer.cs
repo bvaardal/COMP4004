@@ -61,12 +61,17 @@
             this.btn_match = new System.Windows.Forms.Button();
             this.lst_patients = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btn_refreshPatients = new System.Windows.Forms.Button();
-            this.lbl_matchingACVsLabel = new System.Windows.Forms.Label();
-            this.lst_matchingACVs = new System.Windows.Forms.ListBox();
+            this.lst_output = new System.Windows.Forms.ListBox();
             this.lst_visits = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_createCM = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.num_acvSize = new System.Windows.Forms.NumericUpDown();
+            this.btn_unsafePatients = new System.Windows.Forms.Button();
+            this.btn_safePatients = new System.Windows.Forms.Button();
+            this.lbl_output = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,6 +80,9 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_acvSize)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -362,74 +370,56 @@
             // 
             // btn_match
             // 
-            this.btn_match.Location = new System.Drawing.Point(339, 567);
+            this.btn_match.Location = new System.Drawing.Point(6, 367);
             this.btn_match.Name = "btn_match";
-            this.btn_match.Size = new System.Drawing.Size(157, 23);
+            this.btn_match.Size = new System.Drawing.Size(237, 23);
             this.btn_match.TabIndex = 4;
-            this.btn_match.Text = "Match CM to Patient";
+            this.btn_match.Text = "Match CM to Selected Patient(s)";
             this.btn_match.UseVisualStyleBackColor = true;
             this.btn_match.Click += new System.EventHandler(this.btn_match_Click);
             // 
             // lst_patients
             // 
             this.lst_patients.FormattingEnabled = true;
-            this.lst_patients.Location = new System.Drawing.Point(12, 193);
+            this.lst_patients.Location = new System.Drawing.Point(6, 32);
             this.lst_patients.Name = "lst_patients";
-            this.lst_patients.Size = new System.Drawing.Size(75, 368);
+            this.lst_patients.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lst_patients.Size = new System.Drawing.Size(75, 355);
             this.lst_patients.TabIndex = 9;
             this.lst_patients.SelectedIndexChanged += new System.EventHandler(this.lst_patients_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 177);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Patients";
             // 
-            // btn_refreshPatients
+            // lst_output
             // 
-            this.btn_refreshPatients.Location = new System.Drawing.Point(12, 567);
-            this.btn_refreshPatients.Name = "btn_refreshPatients";
-            this.btn_refreshPatients.Size = new System.Drawing.Size(75, 23);
-            this.btn_refreshPatients.TabIndex = 11;
-            this.btn_refreshPatients.Text = "Refresh";
-            this.btn_refreshPatients.UseVisualStyleBackColor = true;
-            this.btn_refreshPatients.Click += new System.EventHandler(this.btn_refreshPatients_Click);
-            // 
-            // lbl_matchingACVsLabel
-            // 
-            this.lbl_matchingACVsLabel.AutoSize = true;
-            this.lbl_matchingACVsLabel.Location = new System.Drawing.Point(335, 177);
-            this.lbl_matchingACVsLabel.Name = "lbl_matchingACVsLabel";
-            this.lbl_matchingACVsLabel.Size = new System.Drawing.Size(191, 13);
-            this.lbl_matchingACVsLabel.TabIndex = 12;
-            this.lbl_matchingACVsLabel.Text = "Matching ACVs for the selected patient";
-            // 
-            // lst_matchingACVs
-            // 
-            this.lst_matchingACVs.FormattingEnabled = true;
-            this.lst_matchingACVs.HorizontalScrollbar = true;
-            this.lst_matchingACVs.Location = new System.Drawing.Point(338, 193);
-            this.lst_matchingACVs.Name = "lst_matchingACVs";
-            this.lst_matchingACVs.Size = new System.Drawing.Size(670, 368);
-            this.lst_matchingACVs.TabIndex = 13;
+            this.lst_output.FormattingEnabled = true;
+            this.lst_output.HorizontalScrollbar = true;
+            this.lst_output.Location = new System.Drawing.Point(6, 32);
+            this.lst_output.Name = "lst_output";
+            this.lst_output.Size = new System.Drawing.Size(640, 329);
+            this.lst_output.TabIndex = 13;
             // 
             // lst_visits
             // 
             this.lst_visits.FormattingEnabled = true;
             this.lst_visits.HorizontalScrollbar = true;
-            this.lst_visits.Location = new System.Drawing.Point(93, 193);
+            this.lst_visits.Location = new System.Drawing.Point(87, 32);
             this.lst_visits.Name = "lst_visits";
             this.lst_visits.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst_visits.Size = new System.Drawing.Size(239, 368);
+            this.lst_visits.Size = new System.Drawing.Size(244, 355);
             this.lst_visits.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(90, 177);
+            this.label2.Location = new System.Drawing.Point(87, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 15;
@@ -437,7 +427,7 @@
             // 
             // btn_createCM
             // 
-            this.btn_createCM.Location = new System.Drawing.Point(93, 567);
+            this.btn_createCM.Location = new System.Drawing.Point(256, 396);
             this.btn_createCM.Name = "btn_createCM";
             this.btn_createCM.Size = new System.Drawing.Size(75, 23);
             this.btn_createCM.TabIndex = 16;
@@ -445,20 +435,89 @@
             this.btn_createCM.UseVisualStyleBackColor = true;
             this.btn_createCM.Click += new System.EventHandler(this.btn_createCM_Click);
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.lst_patients);
+            this.groupBox7.Controls.Add(this.btn_createCM);
+            this.groupBox7.Controls.Add(this.label1);
+            this.groupBox7.Controls.Add(this.label2);
+            this.groupBox7.Controls.Add(this.lst_visits);
+            this.groupBox7.Location = new System.Drawing.Point(12, 174);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(337, 425);
+            this.groupBox7.TabIndex = 17;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Input";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.lbl_output);
+            this.groupBox8.Controls.Add(this.label3);
+            this.groupBox8.Controls.Add(this.num_acvSize);
+            this.groupBox8.Controls.Add(this.btn_unsafePatients);
+            this.groupBox8.Controls.Add(this.btn_safePatients);
+            this.groupBox8.Controls.Add(this.lst_output);
+            this.groupBox8.Controls.Add(this.btn_match);
+            this.groupBox8.Location = new System.Drawing.Point(355, 174);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(653, 425);
+            this.groupBox8.TabIndex = 18;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Output";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(330, 401);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "ACV Size";
+            // 
+            // num_acvSize
+            // 
+            this.num_acvSize.Location = new System.Drawing.Point(387, 399);
+            this.num_acvSize.Name = "num_acvSize";
+            this.num_acvSize.Size = new System.Drawing.Size(51, 20);
+            this.num_acvSize.TabIndex = 18;
+            this.num_acvSize.Tag = "ACV size";
+            // 
+            // btn_unsafePatients
+            // 
+            this.btn_unsafePatients.Location = new System.Drawing.Point(168, 396);
+            this.btn_unsafePatients.Name = "btn_unsafePatients";
+            this.btn_unsafePatients.Size = new System.Drawing.Size(156, 23);
+            this.btn_unsafePatients.TabIndex = 17;
+            this.btn_unsafePatients.Text = "Unsafe Patients";
+            this.btn_unsafePatients.UseVisualStyleBackColor = true;
+            this.btn_unsafePatients.Click += new System.EventHandler(this.btn_unsafePatients_Click);
+            // 
+            // btn_safePatients
+            // 
+            this.btn_safePatients.Location = new System.Drawing.Point(6, 396);
+            this.btn_safePatients.Name = "btn_safePatients";
+            this.btn_safePatients.Size = new System.Drawing.Size(156, 23);
+            this.btn_safePatients.TabIndex = 14;
+            this.btn_safePatients.Text = "Safe Patients";
+            this.btn_safePatients.UseVisualStyleBackColor = true;
+            this.btn_safePatients.Click += new System.EventHandler(this.btn_safePatients_Click);
+            // 
+            // lbl_output
+            // 
+            this.lbl_output.AutoSize = true;
+            this.lbl_output.Location = new System.Drawing.Point(6, 16);
+            this.lbl_output.Name = "lbl_output";
+            this.lbl_output.Size = new System.Drawing.Size(56, 13);
+            this.lbl_output.TabIndex = 17;
+            this.lbl_output.Text = "(No query)";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 602);
-            this.Controls.Add(this.btn_createCM);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lst_visits);
-            this.Controls.Add(this.lst_matchingACVs);
-            this.Controls.Add(this.lbl_matchingACVsLabel);
-            this.Controls.Add(this.btn_refreshPatients);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lst_patients);
-            this.Controls.Add(this.btn_match);
+            this.ClientSize = new System.Drawing.Size(1020, 622);
+            this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.menuStrip1);
             this.MaximizeBox = false;
@@ -478,6 +537,11 @@
             this.groupBox6.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_acvSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -518,11 +582,16 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem createTestDataToolStripMenuItem;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_refreshPatients;
-        private System.Windows.Forms.Label lbl_matchingACVsLabel;
-        private System.Windows.Forms.ListBox lst_matchingACVs;
+        private System.Windows.Forms.ListBox lst_output;
         private System.Windows.Forms.ListBox lst_visits;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_createCM;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown num_acvSize;
+        private System.Windows.Forms.Button btn_unsafePatients;
+        private System.Windows.Forms.Button btn_safePatients;
+        private System.Windows.Forms.Label lbl_output;
     }
 }

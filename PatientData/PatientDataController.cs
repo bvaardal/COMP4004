@@ -48,22 +48,26 @@ namespace PatientData
          *      The CM to compare against
          *  </param>
          */
-        public IEnumerable<IEnumerable<Visit>> GetMatchingACVs(HashSet<CMPair> cm, Patient p)
+        public IEnumerable<IEnumerable<Visit>> GetMatchingACVs(HashSet<CMPair> cm, IEnumerable<Patient> ps)
         {
             List<IEnumerable<Visit>> result = new List<IEnumerable<Visit>>();
 
-            IEnumerable<IEnumerable<Visit>> acvs = model.GetACVs(p, cm.Count<CMPair>());
-
-            foreach (IEnumerable<Visit> acv in acvs)
+            IEnumerable<IEnumerable<Visit>> acvs;
+            foreach (Patient p in ps)
             {
-                bool match = true;
-                foreach (Visit v in acv)
+                acvs = model.GetACVs(p, cm.Count<CMPair>());
+
+                foreach (IEnumerable<Visit> acv in acvs)
                 {
-                    match &= cm.Contains<CMPair>(v, new CMPairMatcher());
-                }
-                if (match)
-                {
-                    result.Add(acv);
+                    bool match = true;
+                    foreach (Visit v in acv)
+                    {
+                        match &= cm.Contains<CMPair>(v, new CMPairMatcher());
+                    }
+                    if (match)
+                    {
+                        result.Add(acv);
+                    }
                 }
             }
 
