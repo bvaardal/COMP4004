@@ -74,6 +74,16 @@ namespace PatientData.Data
             return null;
         }
 
+        public List<Patient> GetPatients()
+        {
+            return patients;
+        }
+
+        public List<HealthProfessional> GetHealthProfessionals()
+        {
+            return healthProfessionals;
+        }
+
         /**
          *  <summary>
          *      Gets all Actual Combinations of Visits (ACV) for the Patient p in nTuples of a

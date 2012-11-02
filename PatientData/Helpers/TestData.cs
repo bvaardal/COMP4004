@@ -205,40 +205,5 @@ namespace PatientData
                 }
             }
         }
-
-        /**
-         *  <summary>
-         *      Gets all ACVs (of same size as the given CM) for the given patient that match the
-         *      given CM.
-         *  </summary>
-         *  
-         *  <param name="pID">
-         *      The ID of the patient to get ACVs for
-         *  </param>
-         *  <param name="cms">
-         *      The CM to compare against
-         *  </param>
-         */
-        /*public IEnumerable<IEnumerable<Visit>> GetMatchingACVs(HashSet<CMPair> cm, Patient p)
-        {
-            List<IEnumerable<Visit>> result = new List<IEnumerable<Visit>>();
-
-            IEnumerable<IEnumerable<Visit>> acvs = _db.GetACVs(p, cm.Count<CMPair>());
-
-            foreach (IEnumerable<Visit> acv in acvs)
-            {
-                bool match = true;
-                foreach (Visit v in acv)
-                {
-                    match &= cm.Contains<CMPair>(v);
-                }
-                if (match)
-                {
-                    result.Add(acv);
-                }
-            }
-
-            return (IEnumerable<IEnumerable<Visit>>)result;
-        }*/
     }
 }

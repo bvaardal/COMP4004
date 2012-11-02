@@ -15,7 +15,9 @@ namespace PatientData.Data
     class SQLiteProxy : DBProxy
     {
         private static String SQL_GetHealthProfessionalByID =   "SELECT hpID from tbl_healthProfessional WHERE hpID = ";
+        private static String SQL_GetHealtProfessionals =       "SELECT hpID from tbl_healthProfessional";
         private static String SQL_GetPatientByID =              "SELECT pID from tbl_patient WHERE pID = ";
+        private static String SQL_GetPatients =                 "SELECT pID from tbl_patient";
         private static String SQL_GetVisitsByPatient =          "SELECT strftime('%Y-%m-%d', vDate) as date, hpID, ohpa, diagnosis, rID FROM tbl_visit WHERE pID = ";
         private static String SQL_InsertHealthProfessional =    "INSERT INTO tbl_healthProfessional (dummy) values ('')";
         private static String SQL_InsertPatient =               "INSERT INTO tbl_patient (dummy) values ('')";
@@ -66,7 +68,7 @@ namespace PatientData.Data
             {
                 generatePatientDataDB();
                 _sqlConnection.ConnectionString =
-                    "Data Source=" + dbName + ".db;" +
+                    "Data Source=" + dbName + ";" +
                     "Version=3;" +
                     "New=False;" +
                     "Compress=True;";
@@ -268,6 +270,44 @@ namespace PatientData.Data
                 long q_pID = dt.Rows[0].Field<long>("pID");
                 result = new Patient(q_pID);
             }
+
+            return result;
+        }
+
+        public List<Patient> GetPatients()
+        {
+            List<Patient> result = new List<Patient>();
+
+            openDBConnection();
+            SQLiteCommand sqlCmd = _sqlConnection.CreateCommand();
+            SQLiteDataAdapter da = new SQLiteDataAdapter(SQL_GetPatients, _sqlConnection);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                result.Add(new Patient(r.Field<long>("pID")));
+            }
+            closeDBConnection();
+
+            return result;
+        }
+
+        public List<HealthProfessional> GetHealthProfessionals()
+        {
+            List<HealthProfessional> result = new List<HealthProfessional>();
+
+            openDBConnection();
+            SQLiteCommand sqlCmd = _sqlConnection.CreateCommand();
+            SQLiteDataAdapter da = new SQLiteDataAdapter(SQL_GetHealtProfessionals, _sqlConnection);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                result.Add(new HealthProfessional(r.Field<long>("hpID")));
+            }
+            closeDBConnection();
 
             return result;
         }

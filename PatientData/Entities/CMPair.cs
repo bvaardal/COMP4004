@@ -15,29 +15,23 @@ namespace PatientData.Entities
             Date = dt;
             Rational = r;
         }
+    }
 
-        public override bool Equals(object obj)
+    class CMPairMatcher : IEqualityComparer<CMPair>
+    {
+        public bool Equals(CMPair x, CMPair y)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            CMPair v = null;
-            try
-            {
-                v = (CMPair)obj;
-            }
-            catch (InvalidCastException)
-            {
-                return false;
-            }
-
             return (
-                this.Date.Equals(v.Date) &&
-                this.Rational == v.Rational);
+                x.Date.Year == y.Date.Year &&
+                x.Date.Month == y.Date.Month &&
+                x.Date.Day == y.Date.Day &&
+                x.Rational == y.Rational);
         }
 
+        public int GetHashCode(CMPair obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     enum Rational

@@ -73,7 +73,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Control\UserIO.cs" />
     <Compile Include="Data\DBProxy.cs" />
     <Compile Include="Data\SQLiteProxy.cs" />
     <Compile Include="Entities\Actor.cs" />
@@ -83,7 +82,14 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\ProfessionalAct.cs" />
     <Compile Include="Entities\Visit.cs" />
+    <Compile Include="GUI\ACVView.cs" />
     <Compile Include="GUI\CMPairControl.cs" />
+    <Compile Include="GUI\GenerateTestData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\GenerateTestData.Designer.cs">
+      <DependentUpon>GenerateTestData.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     <Compile Include="Testing\UnitTests\EntityObjects.UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GUI\GenerateTestData.resx">
+      <DependentUpon>GenerateTestData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

@@ -33,5 +33,10 @@ namespace PatientData.Entities
             ProfessionalAct = proAct;
             Rational = rational;
         }
+
+        public override string ToString()
+        {
+            return "{ Visit by " + Patient + " to " + HealthProfessional + ", " + Date.ToShortDateString()  + ", " + Rational + " }";
+        }
     }
 }

@@ -10,5 +10,10 @@ namespace PatientData.Entities
         public Patient(long pID = -1)
             : base(pID)
         { }
+
+        public override string ToString()
+        {
+            return "Patient " + UID;
+        }
     }
 }

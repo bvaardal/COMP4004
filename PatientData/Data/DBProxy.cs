@@ -15,6 +15,8 @@ namespace PatientData.Data
         void InsertVisit(Visit v);
         List<Visit> GetVisitsByPatient(Patient p);
         Patient GetPatientByID(long pID);
+        List<Patient> GetPatients();
+        List<HealthProfessional> GetHealthProfessionals();
         IEnumerable<IEnumerable<Visit>> GetACVs(Patient p, int n);
     }
 

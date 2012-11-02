@@ -23,5 +23,10 @@ namespace PatientData.Entities
                 throw new InvalidParameterException("Invalid Health Professional ID (" + hpID + ").");
             }
         }
+
+        public override string ToString()
+        {
+            return "HP " + UID;
+        }
     }
 }

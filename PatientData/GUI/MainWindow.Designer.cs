@@ -54,16 +54,19 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnb_newDB = new System.Windows.Forms.ToolStripMenuItem();
             this.mnb_openDB = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.createTestDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createCombinationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getACVsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_createCombinations = new System.Windows.Forms.Button();
-            this.btn_getACVs = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btn_createTestData = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btn_exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_match = new System.Windows.Forms.Button();
+            this.lst_patients = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_refreshPatients = new System.Windows.Forms.Button();
+            this.lbl_matchingACVsLabel = new System.Windows.Forms.Label();
+            this.lst_matchingACVs = new System.Windows.Forms.ListBox();
+            this.lst_visits = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btn_createCM = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -72,7 +75,6 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -224,7 +226,7 @@
             this.chk_cmVisit4Enable.AutoSize = true;
             this.chk_cmVisit4Enable.Checked = true;
             this.chk_cmVisit4Enable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_cmVisit4Enable.Location = new System.Drawing.Point(0, 19);
+            this.chk_cmVisit4Enable.Location = new System.Drawing.Point(6, 19);
             this.chk_cmVisit4Enable.Name = "chk_cmVisit4Enable";
             this.chk_cmVisit4Enable.Size = new System.Drawing.Size(59, 17);
             this.chk_cmVisit4Enable.TabIndex = 11;
@@ -234,7 +236,7 @@
             // 
             // dtp_cmVisit4Date
             // 
-            this.dtp_cmVisit4Date.Location = new System.Drawing.Point(0, 42);
+            this.dtp_cmVisit4Date.Location = new System.Drawing.Point(6, 42);
             this.dtp_cmVisit4Date.Name = "dtp_cmVisit4Date";
             this.dtp_cmVisit4Date.Size = new System.Drawing.Size(177, 20);
             this.dtp_cmVisit4Date.TabIndex = 9;
@@ -242,7 +244,7 @@
             // ddl_cmVisit4Rational
             // 
             this.ddl_cmVisit4Rational.FormattingEnabled = true;
-            this.ddl_cmVisit4Rational.Location = new System.Drawing.Point(0, 68);
+            this.ddl_cmVisit4Rational.Location = new System.Drawing.Point(6, 68);
             this.ddl_cmVisit4Rational.Name = "ddl_cmVisit4Rational";
             this.ddl_cmVisit4Rational.Size = new System.Drawing.Size(177, 21);
             this.ddl_cmVisit4Rational.TabIndex = 10;
@@ -300,11 +302,10 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.actionsToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1019, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1020, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -313,8 +314,10 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnb_newDB,
             this.mnb_openDB,
+            this.toolStripSeparator2,
+            this.createTestDataToolStripMenuItem,
             this.toolStripSeparator1,
-            this.exitToolStripMenuItem});
+            this.btn_exit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -322,110 +325,145 @@
             // mnb_newDB
             // 
             this.mnb_newDB.Name = "mnb_newDB";
-            this.mnb_newDB.Size = new System.Drawing.Size(152, 22);
+            this.mnb_newDB.Size = new System.Drawing.Size(156, 22);
             this.mnb_newDB.Text = "New DB";
             this.mnb_newDB.Click += new System.EventHandler(this.mnb_newDB_Click);
             // 
             // mnb_openDB
             // 
             this.mnb_openDB.Name = "mnb_openDB";
-            this.mnb_openDB.Size = new System.Drawing.Size(152, 22);
+            this.mnb_openDB.Size = new System.Drawing.Size(156, 22);
             this.mnb_openDB.Text = "Open DB";
             this.mnb_openDB.Click += new System.EventHandler(this.mnb_openDB_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(153, 6);
+            // 
+            // createTestDataToolStripMenuItem
+            // 
+            this.createTestDataToolStripMenuItem.Name = "createTestDataToolStripMenuItem";
+            this.createTestDataToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.createTestDataToolStripMenuItem.Text = "Create test data";
+            this.createTestDataToolStripMenuItem.Click += new System.EventHandler(this.btn_createTestData_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
             // 
-            // exitToolStripMenuItem
+            // btn_exit
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.btn_exit.Name = "btn_exit";
+            this.btn_exit.Size = new System.Drawing.Size(156, 22);
+            this.btn_exit.Text = "Exit";
+            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
-            // actionsToolStripMenuItem
+            // btn_match
             // 
-            this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createCombinationsToolStripMenuItem,
-            this.getACVsToolStripMenuItem});
-            this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
-            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.actionsToolStripMenuItem.Text = "Actions";
+            this.btn_match.Location = new System.Drawing.Point(339, 567);
+            this.btn_match.Name = "btn_match";
+            this.btn_match.Size = new System.Drawing.Size(157, 23);
+            this.btn_match.TabIndex = 4;
+            this.btn_match.Text = "Match CM to Patient";
+            this.btn_match.UseVisualStyleBackColor = true;
+            this.btn_match.Click += new System.EventHandler(this.btn_match_Click);
             // 
-            // createCombinationsToolStripMenuItem
+            // lst_patients
             // 
-            this.createCombinationsToolStripMenuItem.Name = "createCombinationsToolStripMenuItem";
-            this.createCombinationsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.createCombinationsToolStripMenuItem.Text = "Create combinations";
+            this.lst_patients.FormattingEnabled = true;
+            this.lst_patients.Location = new System.Drawing.Point(12, 193);
+            this.lst_patients.Name = "lst_patients";
+            this.lst_patients.Size = new System.Drawing.Size(75, 368);
+            this.lst_patients.TabIndex = 9;
+            this.lst_patients.SelectedIndexChanged += new System.EventHandler(this.lst_patients_SelectedIndexChanged);
             // 
-            // getACVsToolStripMenuItem
+            // label1
             // 
-            this.getACVsToolStripMenuItem.Name = "getACVsToolStripMenuItem";
-            this.getACVsToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.getACVsToolStripMenuItem.Text = "Get ACVs";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 177);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Patients";
             // 
-            // btn_createCombinations
+            // btn_refreshPatients
             // 
-            this.btn_createCombinations.Location = new System.Drawing.Point(12, 203);
-            this.btn_createCombinations.Name = "btn_createCombinations";
-            this.btn_createCombinations.Size = new System.Drawing.Size(157, 23);
-            this.btn_createCombinations.TabIndex = 3;
-            this.btn_createCombinations.Text = "Create combinations";
-            this.btn_createCombinations.UseVisualStyleBackColor = true;
+            this.btn_refreshPatients.Location = new System.Drawing.Point(12, 567);
+            this.btn_refreshPatients.Name = "btn_refreshPatients";
+            this.btn_refreshPatients.Size = new System.Drawing.Size(75, 23);
+            this.btn_refreshPatients.TabIndex = 11;
+            this.btn_refreshPatients.Text = "Refresh";
+            this.btn_refreshPatients.UseVisualStyleBackColor = true;
+            this.btn_refreshPatients.Click += new System.EventHandler(this.btn_refreshPatients_Click);
             // 
-            // btn_getACVs
+            // lbl_matchingACVsLabel
             // 
-            this.btn_getACVs.Location = new System.Drawing.Point(12, 232);
-            this.btn_getACVs.Name = "btn_getACVs";
-            this.btn_getACVs.Size = new System.Drawing.Size(157, 23);
-            this.btn_getACVs.TabIndex = 4;
-            this.btn_getACVs.Text = "Get ACVs";
-            this.btn_getACVs.UseVisualStyleBackColor = true;
-            this.btn_getACVs.Click += new System.EventHandler(this.btn_getACVs_Click);
+            this.lbl_matchingACVsLabel.AutoSize = true;
+            this.lbl_matchingACVsLabel.Location = new System.Drawing.Point(335, 177);
+            this.lbl_matchingACVsLabel.Name = "lbl_matchingACVsLabel";
+            this.lbl_matchingACVsLabel.Size = new System.Drawing.Size(191, 13);
+            this.lbl_matchingACVsLabel.TabIndex = 12;
+            this.lbl_matchingACVsLabel.Text = "Matching ACVs for the selected patient";
             // 
-            // dataGridView1
+            // lst_matchingACVs
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(175, 174);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(832, 416);
-            this.dataGridView1.TabIndex = 7;
+            this.lst_matchingACVs.FormattingEnabled = true;
+            this.lst_matchingACVs.HorizontalScrollbar = true;
+            this.lst_matchingACVs.Location = new System.Drawing.Point(338, 193);
+            this.lst_matchingACVs.Name = "lst_matchingACVs";
+            this.lst_matchingACVs.Size = new System.Drawing.Size(670, 368);
+            this.lst_matchingACVs.TabIndex = 13;
             // 
-            // btn_createTestData
+            // lst_visits
             // 
-            this.btn_createTestData.Location = new System.Drawing.Point(12, 174);
-            this.btn_createTestData.Name = "btn_createTestData";
-            this.btn_createTestData.Size = new System.Drawing.Size(157, 23);
-            this.btn_createTestData.TabIndex = 8;
-            this.btn_createTestData.Text = "Create test data";
-            this.btn_createTestData.UseVisualStyleBackColor = true;
+            this.lst_visits.FormattingEnabled = true;
+            this.lst_visits.HorizontalScrollbar = true;
+            this.lst_visits.Location = new System.Drawing.Point(93, 193);
+            this.lst_visits.Name = "lst_visits";
+            this.lst_visits.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lst_visits.Size = new System.Drawing.Size(239, 368);
+            this.lst_visits.TabIndex = 14;
             // 
-            // listBox1
+            // label2
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 261);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(157, 329);
-            this.listBox1.TabIndex = 9;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(90, 177);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Visits";
+            // 
+            // btn_createCM
+            // 
+            this.btn_createCM.Location = new System.Drawing.Point(93, 567);
+            this.btn_createCM.Name = "btn_createCM";
+            this.btn_createCM.Size = new System.Drawing.Size(75, 23);
+            this.btn_createCM.TabIndex = 16;
+            this.btn_createCM.Text = "Create CM";
+            this.btn_createCM.UseVisualStyleBackColor = true;
+            this.btn_createCM.Click += new System.EventHandler(this.btn_createCM_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 602);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.btn_createTestData);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.btn_getACVs);
-            this.Controls.Add(this.btn_createCombinations);
+            this.ClientSize = new System.Drawing.Size(1020, 602);
+            this.Controls.Add(this.btn_createCM);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lst_visits);
+            this.Controls.Add(this.lst_matchingACVs);
+            this.Controls.Add(this.lbl_matchingACVsLabel);
+            this.Controls.Add(this.btn_refreshPatients);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lst_patients);
+            this.Controls.Add(this.btn_match);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.menuStrip1);
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Patient Data Matcher";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -440,7 +478,6 @@
             this.groupBox6.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -475,14 +512,17 @@
         private System.Windows.Forms.ToolStripMenuItem mnb_newDB;
         private System.Windows.Forms.ToolStripMenuItem mnb_openDB;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createCombinationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem getACVsToolStripMenuItem;
-        private System.Windows.Forms.Button btn_createCombinations;
-        private System.Windows.Forms.Button btn_getACVs;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btn_createTestData;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ToolStripMenuItem btn_exit;
+        private System.Windows.Forms.Button btn_match;
+        private System.Windows.Forms.ListBox lst_patients;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem createTestDataToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_refreshPatients;
+        private System.Windows.Forms.Label lbl_matchingACVsLabel;
+        private System.Windows.Forms.ListBox lst_matchingACVs;
+        private System.Windows.Forms.ListBox lst_visits;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_createCM;
     }
 }
