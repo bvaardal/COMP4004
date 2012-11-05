@@ -60,7 +60,8 @@ namespace PatientData.GUI
             chk_cmVisit5Enable.Checked = false;
         }
 
-        #region Events
+        /* Event handlers for MainWindow */
+        #region Event Handlers
         private void enableCMVisit(object sender, EventArgs e)
         {
             /* Enable/disable controls in CMPairControl according to enable checkbox */
@@ -78,15 +79,7 @@ namespace PatientData.GUI
         private void btn_match_Click(object sender, EventArgs e)
         {
             HashSet<CMPair> cm = generateCM();
-            IEnumerable<IEnumerable<Visit>> matches = controller.GetMatchingACVs(cm, Enumerable.Cast<Patient>(lst_patients.SelectedItems));
-
-            List<ACVView> matchView = new List<ACVView>(matches.Count<IEnumerable<Visit>>());
-            foreach (IEnumerable<Visit> match in matches)
-            {
-                matchView.Add(new ACVView(match));
-            }
-            lst_output.DataSource = matchView;
-
+            lst_output.DataSource = generateACVViews(controller.GetMatchingACVs(cm, Enumerable.Cast<Patient>(lst_patients.SelectedItems)));
             lbl_output.Text = "ACVs of selecte patients matching the CM";
         }
 
@@ -187,18 +180,28 @@ namespace PatientData.GUI
 
         private void btn_safePatients_Click(object sender, EventArgs e)
         {
-            lst_output.DataSource = getSafePatients((int)num_acvSize.Value);
+            lst_output.DataSource = controller.getSafePatients((int)num_acvSize.Value);
             lbl_output.Text = "Safe patients with ACV size " + (int)num_acvSize.Value;
         }
 
         private void btn_unsafePatients_Click(object sender, EventArgs e)
         {
-            lst_output.DataSource = getUnsafePatients((int)num_acvSize.Value);
+            lst_output.DataSource = generateACVViews(controller.getUnsafePatients((int)num_acvSize.Value));
             lbl_output.Text = "ACV of unsafe patients with ACV size " + (int)num_acvSize.Value;
+        }
+
+        private void btn_getACVs_Click(object sender, EventArgs e)
+        {
+            lst_output.DataSource = generateACVViews(controller.GetACVs((Patient)lst_patients.SelectedItem, (int)num_acvSize.Value));
         }
         #endregion
 
         #region Functions
+        /**
+         *  <summary>
+         *      Creates a Combination to Match (CM) out of the selected Patients (between 1 and 5).
+         *  </summary>
+         */
         private HashSet<CMPair> generateCM()
         {
             /* Get enabled CMPairs */
@@ -224,6 +227,11 @@ namespace PatientData.GUI
             return result;
         }
 
+        /**
+         *  <summary>
+         *      Refresh model dependent lists.
+         *  </summary>
+         */
         private void refreshLists()
         {
             lst_patients.DataSource = controller.GetPatients();
@@ -235,17 +243,29 @@ namespace PatientData.GUI
             {
                 lst_visits.DataSource = new List<Visit>(0);
             }
-
         }
 
-        private IEnumerable<Patient> getSafePatients(int acvSize)
+        /**
+         *  <summary>
+         *      Turn list of ACVs into a list of viewable items.
+         *  </summary>
+         *  
+         *  <param name="acvs">
+         *      List of ACVs to convert.
+         *  </param>
+         *  
+         *  <returns>
+         *      List of ACVView items corresponding to the given ACVs.
+         *  </returns>
+         */
+        private IEnumerable<ACVView> generateACVViews(IEnumerable<IEnumerable<Visit>> acvs)
         {
-            throw new NotImplementedException();
-        }
-
-        private IEnumerable<IEnumerable<ACVView>> getUnsafePatients(int acvSize)
-        {
-            throw new NotImplementedException();
+            List<ACVView> matchView = new List<ACVView>(acvs.Count<IEnumerable<Visit>>());
+            foreach (IEnumerable<Visit> match in acvs)
+            {
+                matchView.Add(new ACVView(match));
+            }
+            return matchView;
         }
         #endregion
     }

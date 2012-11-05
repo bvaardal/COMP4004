@@ -22,10 +22,10 @@ namespace PatientData.GUI
 
             foreach (Visit v in visits)
             {
-                result += v;
+                result += v + "    ";
             }
 
-            return result;
+            return result.TrimEnd();
         }
     }
 }

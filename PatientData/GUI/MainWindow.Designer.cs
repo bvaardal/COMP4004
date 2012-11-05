@@ -67,11 +67,12 @@
             this.btn_createCM = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.lbl_output = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.num_acvSize = new System.Windows.Forms.NumericUpDown();
             this.btn_unsafePatients = new System.Windows.Forms.Button();
             this.btn_safePatients = new System.Windows.Forms.Button();
-            this.lbl_output = new System.Windows.Forms.Label();
+            this.btn_getACVs = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -451,6 +452,7 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.btn_getACVs);
             this.groupBox8.Controls.Add(this.lbl_output);
             this.groupBox8.Controls.Add(this.label3);
             this.groupBox8.Controls.Add(this.num_acvSize);
@@ -465,10 +467,19 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Output";
             // 
+            // lbl_output
+            // 
+            this.lbl_output.AutoSize = true;
+            this.lbl_output.Location = new System.Drawing.Point(6, 16);
+            this.lbl_output.Name = "lbl_output";
+            this.lbl_output.Size = new System.Drawing.Size(56, 13);
+            this.lbl_output.TabIndex = 17;
+            this.lbl_output.Text = "(No query)";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(330, 401);
+            this.label3.Location = new System.Drawing.Point(411, 401);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 19;
@@ -476,15 +487,30 @@
             // 
             // num_acvSize
             // 
-            this.num_acvSize.Location = new System.Drawing.Point(387, 399);
+            this.num_acvSize.Location = new System.Drawing.Point(468, 399);
+            this.num_acvSize.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.num_acvSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.num_acvSize.Name = "num_acvSize";
             this.num_acvSize.Size = new System.Drawing.Size(51, 20);
             this.num_acvSize.TabIndex = 18;
             this.num_acvSize.Tag = "ACV size";
+            this.num_acvSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // btn_unsafePatients
             // 
-            this.btn_unsafePatients.Location = new System.Drawing.Point(168, 396);
+            this.btn_unsafePatients.Location = new System.Drawing.Point(249, 396);
             this.btn_unsafePatients.Name = "btn_unsafePatients";
             this.btn_unsafePatients.Size = new System.Drawing.Size(156, 23);
             this.btn_unsafePatients.TabIndex = 17;
@@ -494,7 +520,7 @@
             // 
             // btn_safePatients
             // 
-            this.btn_safePatients.Location = new System.Drawing.Point(6, 396);
+            this.btn_safePatients.Location = new System.Drawing.Point(87, 396);
             this.btn_safePatients.Name = "btn_safePatients";
             this.btn_safePatients.Size = new System.Drawing.Size(156, 23);
             this.btn_safePatients.TabIndex = 14;
@@ -502,14 +528,15 @@
             this.btn_safePatients.UseVisualStyleBackColor = true;
             this.btn_safePatients.Click += new System.EventHandler(this.btn_safePatients_Click);
             // 
-            // lbl_output
+            // btn_getACVs
             // 
-            this.lbl_output.AutoSize = true;
-            this.lbl_output.Location = new System.Drawing.Point(6, 16);
-            this.lbl_output.Name = "lbl_output";
-            this.lbl_output.Size = new System.Drawing.Size(56, 13);
-            this.lbl_output.TabIndex = 17;
-            this.lbl_output.Text = "(No query)";
+            this.btn_getACVs.Location = new System.Drawing.Point(6, 396);
+            this.btn_getACVs.Name = "btn_getACVs";
+            this.btn_getACVs.Size = new System.Drawing.Size(75, 23);
+            this.btn_getACVs.TabIndex = 20;
+            this.btn_getACVs.Text = "Get ACVs";
+            this.btn_getACVs.UseVisualStyleBackColor = true;
+            this.btn_getACVs.Click += new System.EventHandler(this.btn_getACVs_Click);
             // 
             // MainWindow
             // 
@@ -521,6 +548,8 @@
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.menuStrip1);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1036, 661);
+            this.MinimumSize = new System.Drawing.Size(1036, 661);
             this.Name = "MainWindow";
             this.Text = "Patient Data Matcher";
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -593,5 +622,6 @@
         private System.Windows.Forms.Button btn_unsafePatients;
         private System.Windows.Forms.Button btn_safePatients;
         private System.Windows.Forms.Label lbl_output;
+        private System.Windows.Forms.Button btn_getACVs;
     }
 }
