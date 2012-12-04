@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PatientData.GUI
@@ -16,6 +17,7 @@ namespace PatientData.GUI
         private PatientDataController controller;
 
         private Dictionary<CMPairControl, CMPair> cmPairsControls;
+        private List<Patient> patients;
         
         public MainWindow(PatientDataController pdc)
         {
@@ -111,12 +113,51 @@ namespace PatientData.GUI
             refreshLists();
         }
 
-        private void btn_createTestData_Click(object sender, EventArgs e)
+        private void mnb_useMemoryDB_Click(object sender, EventArgs e)
+        {
+            controller.InitModel();
+            refreshLists();
+        }
+
+        private void btn_createScenario1TestData_Click(object sender, EventArgs e)
+        {
+            int startVisits = 20;
+            int endVisits = 65;
+            int increments = 5;
+            int matchingPatients = 10;
+            int randomPatients = 90;
+
+            Thread t = new Thread(new ThreadStart(() =>
+                {
+                    createTestDataThreads(startVisits, endVisits, increments, matchingPatients, randomPatients);
+                }
+            ));
+            t.Start();
+        }
+
+        private void btn_createScenario2TestData_Click(object sender, EventArgs e)
+        {
+            int startVisits = 20;
+            int endVisits = 110;
+            int increments = 10;
+            int matchingPatients = 100;
+            int randomPatients = 900;
+
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                createTestDataThreads(startVisits, endVisits, increments, matchingPatients, randomPatients);
+                refreshLists();
+            }
+            ));
+            t.Start();
+        }
+
+        private void btn_createCustomTestData_Click(object sender, EventArgs e)
         {
             if (controller.IsModelInitialized())
             {
                 GenerateTestData gtd = new GenerateTestData();
-                gtd.Disposed += dlg_createTestData_Disposed;
+                gtd.Disposed += dlg_createCustomTestData_Disposed;
                 gtd.ShowDialog(this);
             }
             else
@@ -125,7 +166,7 @@ namespace PatientData.GUI
             }
         }
 
-        private void dlg_createTestData_Disposed(object sender, EventArgs e)
+        private void dlg_createCustomTestData_Disposed(object sender, EventArgs e)
         {
             GenerateTestData gtd = (GenerateTestData)sender;
             controller.CreateTestData(gtd.MatchingPatients, gtd.MatchingVisits, gtd.RandomPatients, gtd.RandomVisits);
@@ -194,6 +235,21 @@ namespace PatientData.GUI
         {
             lst_output.DataSource = generateACVViews(controller.GetACVs((Patient)lst_patients.SelectedItem, (int)num_acvSize.Value));
         }
+
+        private void txt_patientFilter_TextChanged(object sender, EventArgs e)
+        {
+            if (lst_patients.DataSource != null)
+            {
+                try
+                {
+                    lst_patients.DataSource = new List<Patient>(patients.Where<Patient>(p => p.UID == int.Parse(((TextBox)sender).Text)));
+                }
+                catch (Exception)
+                {
+                    lst_patients.DataSource = patients;
+                }
+            }
+        }
         #endregion
 
         #region Functions
@@ -234,7 +290,8 @@ namespace PatientData.GUI
          */
         private void refreshLists()
         {
-            lst_patients.DataSource = controller.GetPatients();
+            patients = controller.GetPatients();
+            lst_patients.DataSource = patients;
             if (((ListBox)lst_patients).SelectedItem != null)
             {
                 lst_visits.DataSource = controller.GetVisitsByPatient((Patient)((ListBox)lst_patients).SelectedItem);
@@ -266,6 +323,29 @@ namespace PatientData.GUI
                 matchView.Add(new ACVView(match));
             }
             return matchView;
+        }
+
+        private void createTestDataThreads(int startVisits, int endVisits, int increments, int matchingPatients, int randomPatients)
+        {
+            lbl_status.Text = "Creating test data";
+
+            for (int i = startVisits; i <= endVisits; i += increments)
+            {
+                controller.CreateTestData(matchingPatients, i, randomPatients, i);
+                
+                this.BeginInvoke(new Action(() =>
+                    {
+                        prb_progress.Value = ((i - startVisits) / (endVisits - startVisits)) * 100;
+                    }
+                ));
+            }
+
+            this.BeginInvoke(new Action(() =>
+                {
+                    prb_progress.Value = 0;
+                    lbl_status.Text = "Ready";
+                }
+            ));
         }
         #endregion
     }

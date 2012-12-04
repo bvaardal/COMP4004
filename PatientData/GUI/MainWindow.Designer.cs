@@ -54,8 +54,13 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnb_newDB = new System.Windows.Forms.ToolStripMenuItem();
             this.mnb_openDB = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.createTestDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.scenario1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scenario2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btn_exit = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_match = new System.Windows.Forms.Button();
@@ -67,12 +72,17 @@
             this.btn_createCM = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.btn_getACVs = new System.Windows.Forms.Button();
             this.lbl_output = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.num_acvSize = new System.Windows.Forms.NumericUpDown();
             this.btn_unsafePatients = new System.Windows.Forms.Button();
             this.btn_safePatients = new System.Windows.Forms.Button();
-            this.btn_getACVs = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.prb_progress = new System.Windows.Forms.ToolStripProgressBar();
+            this.lbl_status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txt_patientFilter = new System.Windows.Forms.TextBox();
+            this.btn_newVisit = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -84,6 +94,7 @@
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_acvSize)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -323,6 +334,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnb_newDB,
             this.mnb_openDB,
+            this.toolStripMenuItem1,
             this.toolStripSeparator2,
             this.createTestDataToolStripMenuItem,
             this.toolStripSeparator1,
@@ -334,38 +346,75 @@
             // mnb_newDB
             // 
             this.mnb_newDB.Name = "mnb_newDB";
-            this.mnb_newDB.Size = new System.Drawing.Size(156, 22);
+            this.mnb_newDB.Size = new System.Drawing.Size(159, 22);
             this.mnb_newDB.Text = "New DB";
             this.mnb_newDB.Click += new System.EventHandler(this.mnb_newDB_Click);
             // 
             // mnb_openDB
             // 
             this.mnb_openDB.Name = "mnb_openDB";
-            this.mnb_openDB.Size = new System.Drawing.Size(156, 22);
+            this.mnb_openDB.Size = new System.Drawing.Size(159, 22);
             this.mnb_openDB.Text = "Open DB";
             this.mnb_openDB.Click += new System.EventHandler(this.mnb_openDB_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
+            this.toolStripMenuItem1.Text = "Use memory DB";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.mnb_useMemoryDB_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(153, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(156, 6);
             // 
             // createTestDataToolStripMenuItem
             // 
+            this.createTestDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.customToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.scenario1ToolStripMenuItem,
+            this.scenario2ToolStripMenuItem});
             this.createTestDataToolStripMenuItem.Name = "createTestDataToolStripMenuItem";
-            this.createTestDataToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.createTestDataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.createTestDataToolStripMenuItem.Text = "Create test data";
-            this.createTestDataToolStripMenuItem.Click += new System.EventHandler(this.btn_createTestData_Click);
+            // 
+            // customToolStripMenuItem
+            // 
+            this.customToolStripMenuItem.Name = "customToolStripMenuItem";
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.customToolStripMenuItem.Text = "Custom";
+            this.customToolStripMenuItem.Click += new System.EventHandler(this.btn_createCustomTestData_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(125, 6);
+            // 
+            // scenario1ToolStripMenuItem
+            // 
+            this.scenario1ToolStripMenuItem.Name = "scenario1ToolStripMenuItem";
+            this.scenario1ToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.scenario1ToolStripMenuItem.Text = "Scenario 1";
+            this.scenario1ToolStripMenuItem.Click += new System.EventHandler(this.btn_createScenario1TestData_Click);
+            // 
+            // scenario2ToolStripMenuItem
+            // 
+            this.scenario2ToolStripMenuItem.Name = "scenario2ToolStripMenuItem";
+            this.scenario2ToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.scenario2ToolStripMenuItem.Text = "Scenario 2";
+            this.scenario2ToolStripMenuItem.Click += new System.EventHandler(this.btn_createScenario2TestData_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(156, 6);
             // 
             // btn_exit
             // 
             this.btn_exit.Name = "btn_exit";
-            this.btn_exit.Size = new System.Drawing.Size(156, 22);
+            this.btn_exit.Size = new System.Drawing.Size(159, 22);
             this.btn_exit.Text = "Exit";
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
@@ -382,10 +431,10 @@
             // lst_patients
             // 
             this.lst_patients.FormattingEnabled = true;
-            this.lst_patients.Location = new System.Drawing.Point(6, 32);
+            this.lst_patients.Location = new System.Drawing.Point(6, 58);
             this.lst_patients.Name = "lst_patients";
             this.lst_patients.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lst_patients.Size = new System.Drawing.Size(75, 355);
+            this.lst_patients.Size = new System.Drawing.Size(75, 329);
             this.lst_patients.TabIndex = 9;
             this.lst_patients.SelectedIndexChanged += new System.EventHandler(this.lst_patients_SelectedIndexChanged);
             // 
@@ -428,7 +477,7 @@
             // 
             // btn_createCM
             // 
-            this.btn_createCM.Location = new System.Drawing.Point(256, 396);
+            this.btn_createCM.Location = new System.Drawing.Point(256, 393);
             this.btn_createCM.Name = "btn_createCM";
             this.btn_createCM.Size = new System.Drawing.Size(75, 23);
             this.btn_createCM.TabIndex = 16;
@@ -438,6 +487,8 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.btn_newVisit);
+            this.groupBox7.Controls.Add(this.txt_patientFilter);
             this.groupBox7.Controls.Add(this.lst_patients);
             this.groupBox7.Controls.Add(this.btn_createCM);
             this.groupBox7.Controls.Add(this.label1);
@@ -466,6 +517,16 @@
             this.groupBox8.TabIndex = 18;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Output";
+            // 
+            // btn_getACVs
+            // 
+            this.btn_getACVs.Location = new System.Drawing.Point(6, 396);
+            this.btn_getACVs.Name = "btn_getACVs";
+            this.btn_getACVs.Size = new System.Drawing.Size(75, 23);
+            this.btn_getACVs.TabIndex = 20;
+            this.btn_getACVs.Text = "Get ACVs";
+            this.btn_getACVs.UseVisualStyleBackColor = true;
+            this.btn_getACVs.Click += new System.EventHandler(this.btn_getACVs_Click);
             // 
             // lbl_output
             // 
@@ -528,28 +589,57 @@
             this.btn_safePatients.UseVisualStyleBackColor = true;
             this.btn_safePatients.Click += new System.EventHandler(this.btn_safePatients_Click);
             // 
-            // btn_getACVs
+            // statusStrip1
             // 
-            this.btn_getACVs.Location = new System.Drawing.Point(6, 396);
-            this.btn_getACVs.Name = "btn_getACVs";
-            this.btn_getACVs.Size = new System.Drawing.Size(75, 23);
-            this.btn_getACVs.TabIndex = 20;
-            this.btn_getACVs.Text = "Get ACVs";
-            this.btn_getACVs.UseVisualStyleBackColor = true;
-            this.btn_getACVs.Click += new System.EventHandler(this.btn_getACVs_Click);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.prb_progress,
+            this.lbl_status});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 622);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1020, 22);
+            this.statusStrip1.TabIndex = 19;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // prb_progress
+            // 
+            this.prb_progress.Name = "prb_progress";
+            this.prb_progress.Size = new System.Drawing.Size(300, 16);
+            // 
+            // lbl_status
+            // 
+            this.lbl_status.Name = "lbl_status";
+            this.lbl_status.Size = new System.Drawing.Size(0, 17);
+            // 
+            // txt_patientFilter
+            // 
+            this.txt_patientFilter.Location = new System.Drawing.Point(7, 33);
+            this.txt_patientFilter.Name = "txt_patientFilter";
+            this.txt_patientFilter.Size = new System.Drawing.Size(74, 20);
+            this.txt_patientFilter.TabIndex = 17;
+            this.txt_patientFilter.TextChanged += new System.EventHandler(this.txt_patientFilter_TextChanged);
+            // 
+            // btn_newVisit
+            // 
+            this.btn_newVisit.Location = new System.Drawing.Point(87, 393);
+            this.btn_newVisit.Name = "btn_newVisit";
+            this.btn_newVisit.Size = new System.Drawing.Size(75, 23);
+            this.btn_newVisit.TabIndex = 18;
+            this.btn_newVisit.Text = "New visit";
+            this.btn_newVisit.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 622);
+            this.ClientSize = new System.Drawing.Size(1020, 644);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.menuStrip1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1036, 661);
-            this.MinimumSize = new System.Drawing.Size(1036, 661);
+            this.MaximumSize = new System.Drawing.Size(1036, 683);
+            this.MinimumSize = new System.Drawing.Size(1036, 683);
             this.Name = "MainWindow";
             this.Text = "Patient Data Matcher";
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -571,6 +661,8 @@
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_acvSize)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -623,5 +715,15 @@
         private System.Windows.Forms.Button btn_safePatients;
         private System.Windows.Forms.Label lbl_output;
         private System.Windows.Forms.Button btn_getACVs;
+        private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem scenario1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scenario2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar prb_progress;
+        private System.Windows.Forms.ToolStripStatusLabel lbl_status;
+        private System.Windows.Forms.TextBox txt_patientFilter;
+        private System.Windows.Forms.Button btn_newVisit;
     }
 }

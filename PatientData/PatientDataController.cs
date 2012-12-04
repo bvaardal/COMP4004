@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PatientData
@@ -14,6 +15,8 @@ namespace PatientData
     {
         private MainWindow view;
         private DBProxy model;
+
+        private int SafeThreshold = 4;
 
         public PatientDataController()
         {
@@ -40,6 +43,23 @@ namespace PatientData
         {
             model = new SQLiteProxy();
             model.Init(path, newDB);
+        }
+
+        /**
+         *  <summary>
+         *      Either by opens the DB in the given path, or creates it.
+         *  </summary>
+         *  
+         *  <param name="path">
+         *      The DB to use.
+         *  </param>
+         *  <param name="newDB">
+         *      Whether to create the given Path (true), or open an existing DB (false).
+         *  </param>
+         */
+        public void InitModel()
+        {
+            model = new MemoryProxy();
         }
 
         /**
@@ -249,8 +269,8 @@ namespace PatientData
          *  <summary>
          *      Searches the DB for Patients who satisfy the criterion to be considered a safe 
          *      Patient:
-         *          All ACVs of the Patient must have at least one matching ACV in at least 4
-         *          other unqiue Patients.
+         *          All ACVs of the Patient must have at least one matching ACV in at least
+         *          [SafeThreshold] other unqiue Patients.
          *  </summary>
          *  
          *  <param name="acvSize">
@@ -316,15 +336,15 @@ namespace PatientData
                             }
                         }
 
-                        /* If 4 matching ACV's from unique patients are found, acv1 is safe */
-                        if (matches == 4)
+                        /* If [SafeThreshold] matching ACV's from unique patients are found, acv1 is safe */
+                        if (matches == SafeThreshold)
                         {
                             break;
                         }
                     }
 
-                    /* If not 4 matching ACV's from unique patients were found, p1 is unsafe (conclusion). */
-                    if (matches != 4)
+                    /* If not [SafeThreshold] matching ACV's from unique patients were found, p1 is unsafe (conclusion). */
+                    if (matches != SafeThreshold)
                     {
                         safe = false;
                         break;
