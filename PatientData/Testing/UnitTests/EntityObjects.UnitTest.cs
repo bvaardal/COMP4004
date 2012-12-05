@@ -16,13 +16,13 @@ namespace PatientData.Testing.UnitTests
         }
 
         [Fact]
-        [Trait("Entity objects unit tests", "Create valid entity objects")]
+        [Trait("Entity objects tests", "Create valid entity objects")]
         /**
          *  <summary>
          *      Creates instances of entity objects that do not have special conditions.
          *  </summary>
          */
-        public void test1()
+        public void ValidEntityObjects()
         {
             Assert.DoesNotThrow(
                 delegate
@@ -39,13 +39,13 @@ namespace PatientData.Testing.UnitTests
         }
 
         [Fact]
-        [Trait("Entity objects unit tests", "Create invalid entity objects")]
+        [Trait("Entity objects tests", "Create invalid entity objects")]
         /**
          *  <summary>
          *      Create invalid instances of entity objects. Expect InvalidParameterException.
          *  </summary>
          */
-        public void test2()
+        public void InvalidEntityObjects()
         {
             Assert.Throws<InvalidParameterException>(
                 delegate

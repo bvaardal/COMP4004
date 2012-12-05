@@ -44,13 +44,13 @@ namespace PatientData.Testing.UnitTests
         }
 
         [Fact]
-        [Trait("DBProxy Unit Tests", "Connect to existing DB")]
+        [Trait("SQLiteProxy Tests", "Connect to existing DB")]
         /**
          *  <summary>
          *      Connects to existing database DB\patientData.db.
          *  </summary>
          */
-        public void test1()
+        public void ExistingDB()
         {
             SQLiteProxy db = new SQLiteProxy();
 
@@ -63,13 +63,13 @@ namespace PatientData.Testing.UnitTests
         }
 
         [Fact]
-        [Trait("DBProxy Unit Tests", "Connect to new DB (creates DB structure)")]
+        [Trait("SQLiteProxy Tests", "Connect to new DB (creates DB structure)")]
         /**
          *  <summary>
          *      Creates new DB, connects to it, adds structure and static data, and deletes the DB.
          *  </summary>
          */
-        public void test2()
+        public void NewDB()
         {
             SQLiteProxy db = new SQLiteProxy();
             String dbName = createTempDB(db);
@@ -85,14 +85,14 @@ namespace PatientData.Testing.UnitTests
         }
 
         [Fact]
-        [Trait("DBProxy Unit Tests", "Insert patient, health professional and visit (get)")]
+        [Trait("SQLiteProxy Tests", "Insert patient, health professional and visit (get)")]
         /**
          *  <summary>
          *      Inserts a patient a heath professional and a multiple visits. Verifies that they
          *      were all added and IDs where set correctly.
          *  </summary>
          */
-        public void test3()
+        public void InsertEntities()
         {
             SQLiteProxy db = new SQLiteProxy();
             String dbName = createTempDB(db);
@@ -102,6 +102,9 @@ namespace PatientData.Testing.UnitTests
             Visit v1 = null;
             Visit v2 = null;
             List<Visit> visits = null;
+
+            Assert.Equal<long>(-1, p.UID);
+            Assert.Equal<long>(-1, hp.UID);
 
             Assert.DoesNotThrow(
                 delegate
@@ -119,12 +122,10 @@ namespace PatientData.Testing.UnitTests
                 }
             );
 
-            Assert.Equal<long>(2, visits.Count);
+            Assert.NotEqual<long>(-1, p.UID);
+            Assert.NotEqual<long>(-1, hp.UID);
 
-            foreach (Visit v in visits)
-            {
-                Assert.True(v.Equals(v1) || v.Equals(v2));
-            }
+            Assert.Equal<long>(2, visits.Count);
 
             try
             {
