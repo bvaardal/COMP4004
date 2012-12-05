@@ -71,6 +71,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_createCM = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btn_newVisit = new System.Windows.Forms.Button();
+            this.txt_patientFilter = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.btn_getACVs = new System.Windows.Forms.Button();
             this.lbl_output = new System.Windows.Forms.Label();
@@ -81,8 +83,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.prb_progress = new System.Windows.Forms.ToolStripProgressBar();
             this.lbl_status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txt_patientFilter = new System.Windows.Forms.TextBox();
-            this.btn_newVisit = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -487,6 +488,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.label4);
             this.groupBox7.Controls.Add(this.btn_newVisit);
             this.groupBox7.Controls.Add(this.txt_patientFilter);
             this.groupBox7.Controls.Add(this.lst_patients);
@@ -496,10 +498,28 @@
             this.groupBox7.Controls.Add(this.lst_visits);
             this.groupBox7.Location = new System.Drawing.Point(12, 174);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(337, 425);
+            this.groupBox7.Size = new System.Drawing.Size(337, 422);
             this.groupBox7.TabIndex = 17;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Input";
+            // 
+            // btn_newVisit
+            // 
+            this.btn_newVisit.Location = new System.Drawing.Point(87, 393);
+            this.btn_newVisit.Name = "btn_newVisit";
+            this.btn_newVisit.Size = new System.Drawing.Size(75, 23);
+            this.btn_newVisit.TabIndex = 18;
+            this.btn_newVisit.Text = "New visit";
+            this.btn_newVisit.UseVisualStyleBackColor = true;
+            this.btn_newVisit.Click += new System.EventHandler(this.btn_newVisit_Click);
+            // 
+            // txt_patientFilter
+            // 
+            this.txt_patientFilter.Location = new System.Drawing.Point(31, 33);
+            this.txt_patientFilter.Name = "txt_patientFilter";
+            this.txt_patientFilter.Size = new System.Drawing.Size(50, 20);
+            this.txt_patientFilter.TabIndex = 17;
+            this.txt_patientFilter.TextChanged += new System.EventHandler(this.txt_patientFilter_TextChanged);
             // 
             // groupBox8
             // 
@@ -513,7 +533,7 @@
             this.groupBox8.Controls.Add(this.btn_match);
             this.groupBox8.Location = new System.Drawing.Point(355, 174);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(653, 425);
+            this.groupBox8.Size = new System.Drawing.Size(653, 423);
             this.groupBox8.TabIndex = 18;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Output";
@@ -594,7 +614,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.prb_progress,
             this.lbl_status});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 622);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 600);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1020, 22);
             this.statusStrip1.TabIndex = 19;
@@ -610,36 +630,28 @@
             this.lbl_status.Name = "lbl_status";
             this.lbl_status.Size = new System.Drawing.Size(0, 17);
             // 
-            // txt_patientFilter
+            // label4
             // 
-            this.txt_patientFilter.Location = new System.Drawing.Point(7, 33);
-            this.txt_patientFilter.Name = "txt_patientFilter";
-            this.txt_patientFilter.Size = new System.Drawing.Size(74, 20);
-            this.txt_patientFilter.TabIndex = 17;
-            this.txt_patientFilter.TextChanged += new System.EventHandler(this.txt_patientFilter_TextChanged);
-            // 
-            // btn_newVisit
-            // 
-            this.btn_newVisit.Location = new System.Drawing.Point(87, 393);
-            this.btn_newVisit.Name = "btn_newVisit";
-            this.btn_newVisit.Size = new System.Drawing.Size(75, 23);
-            this.btn_newVisit.TabIndex = 18;
-            this.btn_newVisit.Text = "New visit";
-            this.btn_newVisit.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(18, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "ID";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 644);
+            this.ClientSize = new System.Drawing.Size(1020, 622);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.menuStrip1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1036, 683);
-            this.MinimumSize = new System.Drawing.Size(1036, 683);
+            this.MaximumSize = new System.Drawing.Size(1036, 661);
+            this.MinimumSize = new System.Drawing.Size(1036, 661);
             this.Name = "MainWindow";
             this.Text = "Patient Data Matcher";
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -725,5 +737,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lbl_status;
         private System.Windows.Forms.TextBox txt_patientFilter;
         private System.Windows.Forms.Button btn_newVisit;
+        private System.Windows.Forms.Label label4;
     }
 }

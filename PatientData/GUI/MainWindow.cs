@@ -18,7 +18,8 @@ namespace PatientData.GUI
 
         private Dictionary<CMPairControl, CMPair> cmPairsControls;
         private List<Patient> patients;
-        
+        private List<Rational> rationals;
+
         public MainWindow(PatientDataController pdc)
         {
             controller = pdc;
@@ -32,7 +33,7 @@ namespace PatientData.GUI
             cmPairsControls.Add(new CMPairControl(chk_cmVisit4Enable, dtp_cmVisit4Date, ddl_cmVisit4Rational), new CMPair(dtp_cmVisit4Date.Value, Rational.initial));
             cmPairsControls.Add(new CMPairControl(chk_cmVisit5Enable, dtp_cmVisit5Date, ddl_cmVisit5Rational), new CMPair(dtp_cmVisit5Date.Value, Rational.initial));
 
-            List<Rational> rationals = new List<Rational>(5);
+            rationals = new List<Rational>(5);
             rationals.Add(Rational.checkup);
             rationals.Add(Rational.emergency);
             rationals.Add(Rational.followUp);
@@ -249,6 +250,23 @@ namespace PatientData.GUI
                     lst_patients.DataSource = patients;
                 }
             }
+        }
+
+        private void btn_newVisit_Click(object sender, EventArgs e)
+        {
+            if (lst_patients.SelectedItems.Count == 1)
+            {
+                VisitForm vf = new VisitForm((Patient)lst_patients.SelectedItem, controller.GetHealthProfessionals(), rationals);
+                vf.Disposed += dlg_newVisit_Disposed;
+                vf.ShowDialog(this);
+            }
+        }
+
+        private void dlg_newVisit_Disposed(object sender, EventArgs e)
+        {
+            Visit visit = ((VisitForm)sender).visit;
+            controller.insertVisit(visit);
+            refreshLists();
         }
         #endregion
 

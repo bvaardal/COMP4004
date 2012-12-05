@@ -202,7 +202,6 @@ namespace PatientData
             return ps;
         }
 
-
         private void createHealthProfessionals(int healthProfessionals)
         {
             for (int i = 0; i < healthProfessionals; i++)
@@ -210,6 +209,11 @@ namespace PatientData
                 HealthProfessional hp = new HealthProfessional();
                 model.InsertHealthProfessional(ref hp);
             }
+        }
+
+        public void insertVisit(Visit visit)
+        {
+            model.InsertVisit(visit);
         }
         #endregion
 
@@ -231,6 +235,28 @@ namespace PatientData
             else
             {
                 return model.GetPatients();
+            }
+
+        }
+
+        /**
+         *  <summary>
+         *      Search the DB for all Patients
+         *  </summary>
+         *  
+         *  <returns>
+         *      The list of all Patients.
+         *  </returns>
+         */
+        public List<HealthProfessional> GetHealthProfessionals()
+        {
+            if (model == null)
+            {
+                return new List<HealthProfessional>();
+            }
+            else
+            {
+                return model.GetHealthProfessionals();
             }
 
         }

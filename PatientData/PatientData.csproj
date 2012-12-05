@@ -97,6 +97,12 @@
     <Compile Include="GUI\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\VisitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\VisitForm.Designer.cs">
+      <DependentUpon>VisitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\TupleGenerator.cs" />
     <Compile Include="Helpers\TestData.cs" />
     <Compile Include="PatientDataController.cs" />
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\VisitForm.resx">
+      <DependentUpon>VisitForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <EmbeddedResource Include="Data\patientData.db">
