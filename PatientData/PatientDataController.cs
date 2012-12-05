@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -211,7 +212,25 @@ namespace PatientData
             }
         }
 
-        public void insertVisit(Visit visit)
+        public void ProcessVisitFile(string file)
+        {
+            StreamReader s = new StreamReader(file);
+            while (!s.EndOfStream)
+            {
+                string visitString = s.ReadLine();
+                string[] split = visitString.Split(new char[] {','});
+                Visit v = new Visit(
+                    model.GetPatientByID(int.Parse(split[0])), 
+                    model.GetHealthProfessionals()[0], 
+                    DateTime.Parse(split[1]), 
+                    new ProfessionalAct(1, 1), 
+                    (Rational)int.Parse(split[2])
+                );
+                model.InsertVisit(v);
+            }
+        }
+
+        public void InsertVisit(Visit visit)
         {
             model.InsertVisit(visit);
         }
@@ -307,7 +326,7 @@ namespace PatientData
          *      The list of safe Patients.
          *  </returns>
          */
-        public IEnumerable<Patient> getSafePatients(int acvSize)
+        public IEnumerable<Patient> GetSafePatients(int acvSize)
         {
             List<Patient> result = new List<Patient>();
             IEnumerable<Patient> ps = model.GetPatients();
@@ -401,7 +420,7 @@ namespace PatientData
          *      For each unsafe Patient, the first ACV that was not matched.
          *  </returns>
          */
-        public IEnumerable<IEnumerable<Visit>> getUnsafePatients(int acvSize)
+        public IEnumerable<IEnumerable<Visit>> GetUnsafePatients(int acvSize)
         {
             List<IEnumerable<Visit>> result = new List<IEnumerable<Visit>>();
             IEnumerable<Patient> ps = model.GetPatients();
@@ -468,6 +487,82 @@ namespace PatientData
                         result.Add(acv1);
                         break;
                     }
+                }
+            }
+
+            return result;
+        }
+
+        public bool PatientSafe(Patient patient, int acvSize)
+        {
+            bool result = true;
+            int threshold = model.PatientVisitCount(patient);
+            IEnumerable<Patient> patients = model.GetPatients();
+            IEnumerable<IEnumerable<Visit>> acvs1 = GetACVs(patient, acvSize);
+            Dictionary<Patient, IEnumerable<IEnumerable<Visit>>> patientAcvs = new Dictionary<Patient, IEnumerable<IEnumerable<Visit>>>();
+
+            foreach (IEnumerable<Visit> acv1 in acvs1)
+            {
+                int matches = 0;
+                /* Traverse other patients (not p1) until 4 Patient with an ACV matching acv1 are found */
+                foreach (Patient p2 in patients)
+                {
+                    if (p2 == patient)
+                    {
+                        continue;
+                    }
+                    //if (model.PatientVisitCount(p2) < threshold)
+                    //{
+                    //    continue;
+                    //}
+
+                    /* Check ACVs of other patient for matches to acv1 */
+                    IEnumerable<IEnumerable<Visit>> acvs2;
+                    if (patientAcvs.ContainsKey(p2))
+                    {
+                        patientAcvs.TryGetValue(p2, out acvs2);
+                    }
+                    else
+                    {
+                        acvs2 = GetACVs(p2, acvSize);
+                        patientAcvs.Add(p2, acvs2);
+                    }
+
+                    foreach (IEnumerable<Visit> acv2 in acvs2)
+                    {
+                        /* Work-around for cast problem (IEnumerable<Visit> to IEnumerable<CMPair>) */
+                        List<CMPair> temp = new List<CMPair>();
+                        foreach (Visit v in acv2)
+                        {
+                            temp.Add((CMPair)v);
+                        }
+
+                        bool match = true;
+                        foreach (Visit v in acv1)
+                        {
+                            match &= temp.Contains(v, new CMPairMatcher());
+                        }
+
+                        /* Found matching ACV, so move on to next patient to match */
+                        if (match)
+                        {
+                            matches++;
+                            break;
+                        }
+                    }
+
+                    /* If 4 matching ACV's from unique patients are found, acv1 is safe */
+                    if (matches == 4)
+                    {
+                        break;
+                    }
+                }
+
+                /* If not 4 matching ACV's from unique patients were found, p1 is unsafe (conclusion). */
+                if (matches != 4)
+                {
+                    result = false;
+                    break;
                 }
             }
 

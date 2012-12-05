@@ -18,6 +18,7 @@ namespace PatientData.Data
         List<Patient> GetPatients();
         List<HealthProfessional> GetHealthProfessionals();
         IEnumerable<IEnumerable<Visit>> GetACVs(Patient p, int n);
+        int PatientVisitCount(Patient p);
     }
 
     class DBException : Exception

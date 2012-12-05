@@ -111,7 +111,8 @@
     <Compile Include="Data\MemoryProxy.cs" />
     <Compile Include="Testing\TestGlobals.cs" />
     <Compile Include="Testing\UnitTests\Queries.UnitTest.cs" />
-    <Compile Include="Testing\UnitTests\SQLite.UnitTest.cs" />
+    <Compile Include="Testing\UnitTests\SQLiteProxy.Test.cs" />
+    <Compile Include="Testing\UnitTests\SQLiteProxy.UnitTest.cs" />
     <Compile Include="Testing\UnitTests\EntityObjects.UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>

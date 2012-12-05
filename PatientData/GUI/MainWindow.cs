@@ -222,13 +222,13 @@ namespace PatientData.GUI
 
         private void btn_safePatients_Click(object sender, EventArgs e)
         {
-            lst_output.DataSource = controller.getSafePatients((int)num_acvSize.Value);
+            lst_output.DataSource = controller.GetSafePatients((int)num_acvSize.Value);
             lbl_output.Text = "Safe patients with ACV size " + (int)num_acvSize.Value;
         }
 
         private void btn_unsafePatients_Click(object sender, EventArgs e)
         {
-            lst_output.DataSource = generateACVViews(controller.getUnsafePatients((int)num_acvSize.Value));
+            lst_output.DataSource = generateACVViews(controller.GetUnsafePatients((int)num_acvSize.Value));
             lbl_output.Text = "ACV of unsafe patients with ACV size " + (int)num_acvSize.Value;
         }
 
@@ -265,8 +265,39 @@ namespace PatientData.GUI
         private void dlg_newVisit_Disposed(object sender, EventArgs e)
         {
             Visit visit = ((VisitForm)sender).visit;
-            controller.insertVisit(visit);
+            controller.InsertVisit(visit);
             refreshLists();
+        }
+
+        private void mnb_visitsFromFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.FileOk += btn_newVisitsRead;
+            fd.ShowDialog(this);
+        }
+
+        private void btn_newVisitsRead(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = (OpenFileDialog)sender;
+            controller.ProcessVisitFile(fd.FileName);
+            refreshLists();
+        }
+
+        private void btn_safe_Click(object sender, EventArgs e)
+        {
+            if (lst_patients.SelectedItems.Count == 1)
+            {
+                DateTime before = DateTime.Now;
+                bool safe = controller.PatientSafe((Patient)lst_patients.SelectedItem, (int)num_acvSize.Value);
+                DateTime after = DateTime.Now;
+
+                TimeSpan delta = after.Subtract(before);
+
+                MessageBox.Show(
+                    this, 
+                    ((Patient)lst_patients.SelectedItem).ToString() + " is " + (safe ? "safe" : "unsafe") + " (" + delta.TotalMilliseconds + " ms).", 
+                    "Patient safety");
+            }
         }
         #endregion
 

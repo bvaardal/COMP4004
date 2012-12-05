@@ -14,6 +14,7 @@ namespace PatientData.Data
 
     class SQLiteProxy : DBProxy
     {
+        private static String SQL_CountPatientVisits =          "SELECT COUNT(*) FROM tbl_visit WHERE pID = ";
         private static String SQL_GetHealthProfessionalByID =   "SELECT hpID from tbl_healthProfessional WHERE hpID = ";
         private static String SQL_GetHealtProfessionals =       "SELECT hpID from tbl_healthProfessional";
         private static String SQL_GetPatientByID =              "SELECT pID from tbl_patient WHERE pID = ";
@@ -332,6 +333,25 @@ namespace PatientData.Data
                 throw new TupleSizeException(n);
             }
             return TupleGenerator.VisitCombinations(GetVisitsByPatient(p), n);
+        }
+
+        public int PatientVisitCount(Patient p)
+        {
+            int result = 0;
+
+            openDBConnection();
+            SQLiteCommand sqlCmd = _sqlConnection.CreateCommand();
+            SQLiteDataAdapter da = new SQLiteDataAdapter(SQL_CountPatientVisits + p.UID, _sqlConnection);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                result = (int)r.Field<long>("COUNT(*)");
+            }
+            closeDBConnection();
+
+            return result;
         }
     }
 }

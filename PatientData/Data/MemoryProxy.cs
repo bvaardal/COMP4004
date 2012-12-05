@@ -105,5 +105,10 @@ namespace PatientData.Data
             }
             return TupleGenerator.VisitCombinations(GetVisitsByPatient(p), n);
         }
+
+        public int PatientVisitCount(Patient p)
+        {
+            return GetVisitsByPatient(p).Count;
+        }
     }
 }
